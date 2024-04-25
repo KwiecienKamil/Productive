@@ -1,16 +1,11 @@
-import Navbar from "./components/Navbar";
+import Rewards from "./components/Rewards";
+import Tasks from "./components/Tasks";
 
 export default function Home() {
   return (
     <>
-      <div
-        data-theme="light"
-        className="h-screen px-[15%] flex justify-between pt-8"
-      >
-        <Navbar />
-        <div className=""></div>
-        <div className=""></div>
-      </div>
+      <Tasks />
+      <Rewards />
     </>
   );
 }

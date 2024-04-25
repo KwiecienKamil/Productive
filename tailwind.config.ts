@@ -13,11 +13,18 @@ const config: Config = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      colors: {
+        lightblue: "#67ccd1",
+        darkblue: "#052a75",
+      },
+      fontFamily: {
+        inter: "Inter",
+      },
     },
   },
-  plugins: [require("daisyui")],
+  plugins: [require("daisyui"), require("tailwind-scrollbar")],
   daisyui: {
-    themes: ["light", "dark"],
+    themes: ["light", "dark", "emerald"],
   },
 };
 export default config;

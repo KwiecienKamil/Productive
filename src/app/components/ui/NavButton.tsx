@@ -1,8 +1,10 @@
-import React from "react";
+import React, { FC } from "react";
 
-const NavButton = (children: React.ReactNode) => {
+interface NavButtonProps extends React.HTMLAttributes<HTMLButtonElement> {}
+
+const NavButton: FC<NavButtonProps> = ({ children }) => {
   return (
-    <button className="btn btn-xs sm:btn-sm md:btn-md lg:btn-d btn-outline btn-info rounded-lg">
+    <button className="font-semibold flex items-center gap-1 py-2 px-3 rounded-lg hover:bg-lightblue duration-300 transition-colors">
       {children}
     </button>
   );
