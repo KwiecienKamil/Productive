@@ -14,11 +14,21 @@ const config: Config = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
       colors: {
-        lightblue: "#67ccd1",
-        darkblue: "#052a75",
+        pri: "#222831",
+        sec: "#393E46",
+        acc: "#00ADB5",
       },
       fontFamily: {
         inter: "Inter",
+      },
+      fontSize: {
+        sm: "0.8rem",
+        base: "1rem",
+        xl: "1.1rem",
+        "2xl": "1.363rem",
+        "3xl": "1.953rem",
+        "4xl": "2.441rem",
+        "5xl": "3.052rem",
       },
     },
   },
