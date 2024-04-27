@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 export interface Task {
-  id: string | undefined;
+  id: number | undefined;
   title: string | undefined;
-  doneDate: string | undefined;
+  doneDates: string[];
 }
 
 interface tasksState {
@@ -20,20 +20,19 @@ export const taskSlice = createSlice({
   name: "task",
   initialState,
   reducers: {
-    addToCart: (state, action) => {
+    addTask: (state, action) => {
       state.tasks.push(action.payload);
-
-      localStorage.setItem("products", JSON.stringify(state.tasks));
+      localStorage.setItem("tasks", JSON.stringify(state.tasks));
     },
-    removeFromCart: (state, action) => {
+    removeTask: (state, action) => {
       const updatedCart = state.tasks.filter(
         (item) => item.id !== action.payload.id
       );
       state.tasks = updatedCart;
-      localStorage.setItem("products", JSON.stringify(state.tasks));
+      localStorage.setItem("tasks", JSON.stringify(state.tasks));
     },
   },
 });
 
 export default taskSlice.reducer;
-export const { addToCart, removeFromCart } = taskSlice.actions;
+export const { addTask, removeTask } = taskSlice.actions;
