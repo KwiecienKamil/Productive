@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import dayjs from "dayjs";
 
 export interface Task {
   id: number | undefined;
@@ -26,13 +27,33 @@ export const taskSlice = createSlice({
     },
     removeTask: (state, action) => {
       const updatedCart = state.tasks.filter(
-        (item) => item.id !== action.payload.id
+        (task) => task.id !== action.payload.id
       );
       state.tasks = updatedCart;
+      localStorage.setItem("tasks", JSON.stringify(state.tasks));
+    },
+    doneDate: (state, action) => {
+      const currentTask = state.tasks.find(
+        (task) => task.id === action.payload.id
+      );
+      if (currentTask?.doneDates.length === 0) {
+        currentTask?.doneDates.push(dayjs().format("DD-MM-YY"));
+      } else {
+      }
+      if (
+        currentTask?.doneDates.filter(
+          (date) => date === dayjs().format("DD-MM-YY")
+        )
+      ) {
+        alert("XD");
+      } else {
+        currentTask?.doneDates.push(dayjs().format("DD-MM-YY"));
+      }
+
       localStorage.setItem("tasks", JSON.stringify(state.tasks));
     },
   },
 });
 
 export default taskSlice.reducer;
-export const { addTask, removeTask } = taskSlice.actions;
+export const { addTask, removeTask, doneDate } = taskSlice.actions;
