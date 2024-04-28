@@ -1,10 +1,11 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, current } from "@reduxjs/toolkit";
 import dayjs from "dayjs";
 
 export interface Task {
   id: number | undefined;
   title: string | undefined;
   doneDates: string[];
+  isTaskDone: boolean;
 }
 
 interface tasksState {
@@ -36,24 +37,43 @@ export const taskSlice = createSlice({
       const currentTask = state.tasks.find(
         (task) => task.id === action.payload.id
       );
-      if (currentTask?.doneDates.length === 0) {
-        currentTask?.doneDates.push(dayjs().format("DD-MM-YY"));
-      } else {
-      }
+
       if (
-        currentTask?.doneDates.filter(
+        currentTask?.doneDates.find(
           (date) => date === dayjs().format("DD-MM-YY")
         )
       ) {
-        alert("XD");
       } else {
         currentTask?.doneDates.push(dayjs().format("DD-MM-YY"));
+        currentTask!.isTaskDone = true;
       }
 
+      localStorage.setItem("tasks", JSON.stringify(state.tasks));
+    },
+    notDoneTask: (state, action) => {
+      const currentTask = state.tasks.find(
+        (task) => task.id === action.payload.id
+      );
+
+      const dateIndex = currentTask?.doneDates.indexOf(
+        dayjs().format("DD-MM-YY")
+      );
+      currentTask?.doneDates.splice(dateIndex!, 1);
+      currentTask!.isTaskDone = false;
+
+      localStorage.setItem("tasks", JSON.stringify(state.tasks));
+    },
+    updateTaskTitle: (state, action) => {
+      const currentTask = state.tasks.find(
+        (task) => task.id === action.payload.id
+      );
+
+      currentTask!.title = action.payload.title;
       localStorage.setItem("tasks", JSON.stringify(state.tasks));
     },
   },
 });
 
 export default taskSlice.reducer;
-export const { addTask, removeTask, doneDate } = taskSlice.actions;
+export const { addTask, removeTask, doneDate, notDoneTask, updateTaskTitle } =
+  taskSlice.actions;

@@ -10,14 +10,13 @@ const Tasks = () => {
   const dispatch = useAppDispatch();
   const state = useAppSelector((state) => state.task.tasks);
 
-  console.log(state);
-
   const handleAddTask = () => {
     dispatch(
       addTask({
         id: Math.floor(Math.random() * 99999),
         title: "Task",
         doneDates: [],
+        isTaskDone: false,
       })
     );
   };

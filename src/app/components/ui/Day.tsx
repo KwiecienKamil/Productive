@@ -1,3 +1,4 @@
+import { useAppSelector } from "@/app/services/state/store";
 import { log } from "console";
 import dayjs from "dayjs";
 import { useState } from "react";
@@ -5,12 +6,18 @@ import { useState } from "react";
 type DayProps = {
   day: dayjs.Dayjs;
   rowIdx: number;
-  isTaskDone: boolean;
+  taskId: number | undefined;
 };
 
-const Day = ({ day, rowIdx, isTaskDone }: DayProps) => {
+const Day = ({ day, rowIdx, taskId }: DayProps) => {
+  const state = useAppSelector((state) => state.task.tasks);
+
+  const currentTask = state.find((currentTask) => currentTask.id === taskId);
+  const currentDoneDates = currentTask?.doneDates;
+  const isCurrentTaskDone = currentTask?.isTaskDone;
+
   const getCurrentDay = () => {
-    return day.format("DD-MM-YY") === dayjs().format("DD-MM-YY")
+    return currentDoneDates?.find((date) => date === day.format("DD-MM-YY"))
       ? "currentDay"
       : "notCurrentDay";
   };
@@ -24,7 +31,7 @@ const Day = ({ day, rowIdx, isTaskDone }: DayProps) => {
       )}
       <div
         className={
-          isTaskDone && getCurrentDay() === "currentDay"
+          isCurrentTaskDone && getCurrentDay() === "currentDay"
             ? `h-4 w-4 m-2 bg-green-400 rounded-sm`
             : `h-4 w-4 m-2 bg-slate-300 rounded-sm`
         }
