@@ -11,7 +11,7 @@ const Navbar = () => {
         <RiCopperCoinLine className="text-yellow-500" />
       </div>
       {NavButtons.map((button) => (
-        <NavButton key={button.id}>
+        <NavButton key={button.id} followingHref={button.href}>
           {button.icon}
           {button.text}
         </NavButton>

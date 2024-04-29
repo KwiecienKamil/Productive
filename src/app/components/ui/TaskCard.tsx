@@ -47,7 +47,7 @@ const TaskCard: FC<TaskCardProps> = ({ id, title, task }) => {
   };
 
   return (
-    <div className="card w-96 bg-base-100 shadow-xl text-xl" key={id}>
+    <div className="card w-96 bg-base-100 shadow-sm text-xl" key={id}>
       <div className="p-4 py-2 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <CiEdit
@@ -67,7 +67,7 @@ const TaskCard: FC<TaskCardProps> = ({ id, title, task }) => {
               />
             </div>
           ) : (
-            <h2 className="card-title">{title}</h2>
+            <h2 className="card-title cursor-default">{title}</h2>
           )}
         </div>
         <input

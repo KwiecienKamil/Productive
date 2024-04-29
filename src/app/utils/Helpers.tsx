@@ -9,16 +9,19 @@ export const NavButtons = [
     id: 1,
     icon: <FaHome />,
     text: "Home",
+    href: "/",
   },
   {
     id: 2,
     icon: <RiTaskFill />,
     text: "Missions",
+    href: "/missions",
   },
   {
     id: 3,
     icon: <FaUserCircle />,
     text: "Profile",
+    href: "/profile",
   },
 ];
 

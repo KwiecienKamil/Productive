@@ -31,7 +31,7 @@ const Day = ({ day, rowIdx, taskId }: DayProps) => {
       )}
       <div
         className={
-          isCurrentTaskDone && getCurrentDay() === "currentDay"
+          getCurrentDay() === "currentDay"
             ? `h-4 w-4 m-2 bg-green-400 rounded-sm`
             : `h-4 w-4 m-2 bg-slate-300 rounded-sm`
         }

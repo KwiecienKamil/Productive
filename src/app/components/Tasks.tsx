@@ -24,8 +24,8 @@ const Tasks = () => {
   return (
     <div className="max-h-screen w-[70%] px-4 overflow-scroll scrollbar scrollbar-thumb-transparent">
       <div className="flex items-center gap-4">
-        <p className="font-semibold text-lg pt-2">10 Tasks</p>
-        <NavButton>
+        <p className="font-semibold text-lg">{state.length} Tasks</p>
+        <NavButton followingHref="#">
           <FaPlus className="text-sm" onClick={handleAddTask} />
         </NavButton>
       </div>
