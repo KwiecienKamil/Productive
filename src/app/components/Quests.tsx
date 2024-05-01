@@ -1,14 +1,19 @@
 import React from "react";
-import MissionCard from "./ui/MissionCard";
+import MissionCompoment from "./ui/MissionComponent";
+import { missions } from "../utils/Helpers";
 
 const Quests = () => {
   return (
-    <div className="card w-96 shadow-sm p-4 bg-white">
+    <div className="card w-[28rem] shadow-sm p-4 bg-white">
       <h1 className="font-bold">Quests</h1>
       <div className="pt-8 flex flex-col gap-4">
-        <MissionCard title="Complete Task" />
-        <MissionCard title="Complete 3 Tasks" />
-        <MissionCard title="Complete 5 Tasks" />
+        {missions.map((mission) => (
+          <MissionCompoment
+            title={mission.title}
+            value={mission.value}
+            key={mission.id}
+          />
+        ))}
       </div>
     </div>
   );

@@ -38,3 +38,21 @@ export function getMonth(month = dayjs().month()) {
   });
   return daysArray;
 }
+
+export const missions = [
+  {
+    id: 1,
+    title: "Complete Task",
+    value: 5,
+  },
+  {
+    id: 2,
+    title: "Complete 3 Tasks",
+    value: 10,
+  },
+  {
+    id: 3,
+    title: "Complete 5 Tasks",
+    value: 15,
+  },
+];

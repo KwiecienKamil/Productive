@@ -17,6 +17,7 @@ const config: Config = {
         pri: "#222831",
         sec: "#393E46",
         acc: "#00ADB5",
+        lightGray: "#DCDCDC",
       },
       fontFamily: {
         inter: "Inter",
