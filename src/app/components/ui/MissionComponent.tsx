@@ -21,7 +21,6 @@ const MissionCompoment: FC<MissionCompomentProps> = ({
   state.map((item) => doneDates.push(item.doneDates.length));
   const numberOfTasksDone = doneDates.filter((item: number) => item > 0);
 
-  console.log(numberOfTasksDone.length, numberToComplete);
 
   return (
     <div className="flex flex-col gap-1" key={id}>
@@ -29,7 +28,7 @@ const MissionCompoment: FC<MissionCompomentProps> = ({
       <div className="flex items-center justify-between">
         <div
           className={
-            numberOfTasksDone.length <= numberToComplete
+            numberOfTasksDone.length < numberToComplete
               ? "w-[80%] p-2 mt-1 bg-[#DCDCDC] rounded-full overflow-hidden"
               : "w-[80%] p-2 mt-1 bg-green-400 rounded-full overflow-hidden"
           }

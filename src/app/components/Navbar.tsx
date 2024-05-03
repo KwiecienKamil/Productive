@@ -10,10 +10,7 @@ const Navbar = () => {
   console.log(state);
 
   return (
-    <div className="flex flex-col gap-4 mr-2">
-      <div className="px-[10px] text-2xl">
-        <RiCopperCoinLine className="text-yellow-500" />
-      </div>
+    <div className="flex flex-col gap-4 mr-2 pt-12">
       {NavButtons.map((button) => (
         <NavButton key={button.id} followingHref={button.href}>
           {button.icon}
