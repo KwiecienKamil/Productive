@@ -11,7 +11,8 @@ const Quests = () => {
           <MissionCompoment
             title={mission.title}
             value={mission.value}
-            key={mission.id}
+            id={mission.id}
+            numberToComplete={mission.numberOfTasksToComplete}
           />
         ))}
       </div>

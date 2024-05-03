@@ -44,15 +44,18 @@ export const missions = [
     id: 1,
     title: "Complete Task",
     value: 5,
+    numberOfTasksToComplete: 1,
   },
   {
     id: 2,
     title: "Complete 3 Tasks",
     value: 10,
+    numberOfTasksToComplete: 3,
   },
   {
     id: 3,
     title: "Complete 5 Tasks",
     value: 15,
+    numberOfTasksToComplete: 5,
   },
 ];

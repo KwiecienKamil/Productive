@@ -1,5 +1,6 @@
 import { SlPresent } from "react-icons/sl";
 import NavButton from "./ui/NavButton";
+import Link from "next/link";
 
 const Rewards = () => {
   return (
@@ -11,9 +12,14 @@ const Rewards = () => {
           <p className="text-md w-[180px]">Grow your day streak to get coins</p>
         </div>
       </div>
-      <button className="w-full mt-2 p-1 bg-green-500 rounded-lg text-black hover:brightness-95 duration-300">
-        Missions
-      </button>
+      <div className="flex justify-center">
+        <Link
+          href="/missions"
+          className="w-[80%] text-center mt-2 p-1 bg-green-500 rounded-lg text-black hover:brightness-95 duration-300"
+        >
+          Missions
+        </Link>
+      </div>
     </div>
   );
 };
