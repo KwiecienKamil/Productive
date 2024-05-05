@@ -32,7 +32,7 @@ const Navbar = () => {
           {button.text}
         </NavButton>
       ))}
-      <button onClick={handleSubmit}>XD</button>
+      <button onClick={handleSubmit}>{process.env.NEXT_PUBLIC_USER}</button>
     </div>
   );
 };
