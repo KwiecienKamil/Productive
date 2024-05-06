@@ -1,5 +1,6 @@
+import axios from "axios";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect } from "react";
 
 const LoginForm = () => {
   return (
@@ -35,7 +36,7 @@ const LoginForm = () => {
           <input type="password" className="grow" placeholder="Password" />
         </label>
         <div className="text-end">
-          <Link href="/register" className="hover:font-semibold">
+          <Link href="/register" className="hover:text-black">
             Create Account
           </Link>
         </div>
