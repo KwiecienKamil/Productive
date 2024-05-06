@@ -21,7 +21,7 @@ export default function RootLayout({
       <html lang="en">
         <body
           data-theme="emerald"
-          className="h-screen px-[15%] flex justify-between pt-8 font-inter text-[#222831] bg-[#EEEEEE]"
+          className="h-screen px-[15%] flex justify-between pt-8 font-inter text-black bg-[#F1CC7B]"
         >
           {children}
         </body>

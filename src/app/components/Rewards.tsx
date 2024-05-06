@@ -5,7 +5,7 @@ import Link from "next/link";
 const Rewards = () => {
   return (
     <div>
-      <div className="flex gap-3 pt-16 relative">
+      <div className="flex gap-3 pt-12 relative">
         <SlPresent className="mt-[2px] text-yellow-600 text-2xl" />
         <div>
           <h3 className="font-semibold text-lg">Take your reward</h3>

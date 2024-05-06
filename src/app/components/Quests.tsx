@@ -4,7 +4,7 @@ import { missions } from "../utils/Helpers";
 
 const Quests = () => {
   return (
-    <div className="card w-[28rem] shadow-sm p-4 bg-white">
+    <div className="card w-[28rem] shadow-sm p-4 bg-sec text-white">
       <h1 className="font-bold">Quests</h1>
       <div className="pt-8 flex flex-col gap-4">
         {missions.map((mission) => (
