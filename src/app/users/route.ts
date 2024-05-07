@@ -1,23 +1,15 @@
 import { NextResponse } from "next/server";
-import pool from "@/app/libs/mysql";
+import pool from "../libs/mysql";
 
-export async function GET() {
+export async function POST() {
   try {
+    const values = ["XDSDAS", "123323244"];
+    const query = "INSERT INTO Users (Username, Password) VALUES (?, ?)";
     const db = await pool.getConnection();
-    const Users_id = 4;
-    const Username = "kamciuuu";
-    const Password = "12345";
+    const [result] = await db.execute(query, values);
+    db.release();
 
-    const query =
-      "INSERT INTO Users (Users_id, Username, Password) VALUES (Users_id, Username, Password)";
-
-    db.query(query, function (error: any, data: any) {
-      if (error) {
-        throw error;
-      } else {
-        console.log(data);
-      }
-    });
+    return NextResponse.json(result);
   } catch (error) {
     return NextResponse.json(
       {
