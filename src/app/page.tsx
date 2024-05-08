@@ -1,13 +1,12 @@
-import LoginForm from "./components/LoginForm";
-import Form from "./components/LoginForm";
-import Navbar from "./components/Navbar";
-import Rewards from "./components/Rewards";
-import Tasks from "./components/Tasks";
+import ReusableForm from "./components/ReusableForm";
 
 export default function Home() {
   return (
-    <>
-      <LoginForm />
-    </>
+    <div className="flex flex-col items-center justify-center h-screen w-full ">
+      <p className="text-2xl pb-8 text-center ">
+        Welcome to <span className="font-bold">Productive</span>
+      </p>
+      <ReusableForm />
+    </div>
   );
 }
