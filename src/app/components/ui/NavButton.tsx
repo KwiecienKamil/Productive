@@ -11,7 +11,7 @@ const NavButton: FC<NavButtonProps> = ({ children, followingHref }) => {
   return (
     <Link
       href={`${followingHref}`}
-      className="font-semibold flex items-center gap-1 py-2 px-3 rounded-lg hover:bg-lightGray duration-300 transition-colors text-xl"
+      className="font-semibold flex items-center gap-1 py-2 px-3 rounded-lg hover:bg-pri duration-300 transition-colors text-xl"
     >
       {children}
     </Link>

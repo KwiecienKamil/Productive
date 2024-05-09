@@ -9,7 +9,7 @@ export const NavButtons = [
     id: 1,
     icon: <FaHome />,
     text: "Home",
-    href: "/",
+    href: "/dashboard",
   },
   {
     id: 2,

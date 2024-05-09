@@ -22,16 +22,14 @@ const Register = () => {
 
   return (
     <div className="h-screen w-full flex-col flex items-center justify-center ">
-      <p className="text-2xl pb-12 text-center">
+      <p className="text-2xl pb-2 text-center">
         Welcome to <span className="font-semibold">Productive</span>
       </p>
+      <p className="text-[#787878] pb-2 text-xl">Register</p>
       <form
-        className="flex flex-col gap-2 w-[450px] bg-white p-8 rounded-xl"
+        className="flex flex-col gap-2 w-[450px] pt-2 rounded-xl"
         method="post"
       >
-        <h2 className="text-center text-2xl text-sec pb-4 font-bold">
-          Register
-        </h2>
         <label
           htmlFor="username"
           className="input input-bordered flex items-center gap-2"
@@ -82,7 +80,7 @@ const Register = () => {
         </label>
         <div className=" flex items-center justify-end gap-2">
           <p className="text-[#787878]">Already have account?</p>
-          <Link href="/login" className="hover:text-black text-[#d8ad50]">
+          <Link href="/" className="hover:text-black text-black font-semibold">
             Login
           </Link>
         </div>

@@ -1,12 +1,14 @@
-import ReusableForm from "./components/ReusableForm";
+import LoginForm from "./components/LoginForm";
+import ReusableForm from "./components/LoginForm";
 
 export default function Home() {
   return (
-    <div className="flex flex-col items-center justify-center h-screen w-full ">
-      <p className="text-2xl pb-8 text-center ">
-        Welcome to <span className="font-bold">Productive</span>
+    <div className="h-screen w-full flex-col flex items-center justify-center ">
+      <p className="text-2xl pb-2 text-center">
+        Welcome to <span className="font-semibold">Productive</span>
       </p>
-      <ReusableForm />
+      <p className="text-[#787878] pb-2 text-xl">Login</p>
+      <LoginForm />
     </div>
   );
 }
