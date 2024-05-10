@@ -1,31 +1,32 @@
 "use client";
 import axios from "axios";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import React, { FC, FormEvent, useState } from "react";
 
 const LoginForm: FC = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [loginStatus, setLoginStatus] = useState();
   const router = useRouter();
-
-  // const handleSubmit = async (e: FormEvent) => {
-  //   e.preventDefault();
-  //   axios.post("http://localhost:3000/api", {
-  //     username,
-  //     password,
-  //   });
-  //   setUsername("");
-  //   setPassword("");
-  //   router.push("/");
-  // };
 
   const handleLogin = async (e: FormEvent) => {
     e.preventDefault();
-    axios.post("http://localhost:3000/api/login", {
-      username,
-      password,
-    });
+    try {
+      const response: any = axios
+        .post("http://localhost:3000/api/login", {
+          username,
+          password,
+        })
+        .then((res) => {
+          if (res.data.success === true) {
+            router.push("/dashboard");
+          }
+        })
+        .catch((error) => console.log(error));
+    } catch (err) {
+      console.log(err);
+    }
     setUsername("");
     setPassword("");
   };
@@ -92,7 +93,6 @@ const LoginForm: FC = () => {
         </Link>
       </div>
       <button
-        type="submit"
         className="btn bg-sec text-white hover:bg-[#23262b] mt-4"
         onClick={handleLogin}
       >
