@@ -1,8 +1,9 @@
 "use client";
-import React, { FormEvent, useEffect, useState } from "react";
+import React, { FormEvent, useState } from "react";
 import Link from "next/link";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 const Register = () => {
   const [username, setUsername] = useState("");
@@ -11,13 +12,30 @@ const Register = () => {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    axios.post("http://localhost:3000/api", {
-      username,
-      password,
-    });
+    axios
+      .post("http://localhost:3000/api", {
+        username,
+        password,
+      })
+      .then((res) => {
+        if (res.status === 200) {
+          if (username.length > 4 && password.length > 4) {
+            toast.success("Successfully Registered, Now Login");
+            router.push("/");
+          } else {
+            toast.error("Username and password must be at least 5 characters");
+          }
+        } else {
+          toast.error("There was a problem, try again later");
+        }
+      })
+      .catch((error) => {
+        if (error.code === "ERR_BAD_REQUEST") {
+          toast.error("There was a problem, try again later");
+        }
+      });
     setUsername("");
     setPassword("");
-    router.push("/");
   };
 
   return (
@@ -89,7 +107,7 @@ const Register = () => {
           className="btn bg-sec text-white hover:bg-[#23262b] mt-4"
           onClick={handleSubmit}
         >
-          Login
+          Register
         </button>
       </form>
     </div>

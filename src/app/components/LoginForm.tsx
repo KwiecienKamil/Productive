@@ -1,29 +1,31 @@
 "use client";
 import axios from "axios";
 import Link from "next/link";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import React, { FC, FormEvent, useState } from "react";
+import { toast } from "sonner";
 
 const LoginForm: FC = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [loginStatus, setLoginStatus] = useState();
   const router = useRouter();
 
   const handleLogin = async (e: FormEvent) => {
     e.preventDefault();
     try {
-      const response: any = axios
+      axios
         .post("http://localhost:3000/api/login", {
           username,
           password,
         })
         .then((res) => {
           if (res.data.success === true) {
+            toast.success("Successfully Logged In");
             router.push("/dashboard");
+          } else {
+            toast.error("Wrong Username/Password");
           }
-        })
-        .catch((error) => console.log(error));
+        });
     } catch (err) {
       console.log(err);
     }
