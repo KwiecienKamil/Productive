@@ -29,7 +29,11 @@ const Tasks = () => {
           <FaPlus className="text-sm" onClick={handleAddTask} />
         </NavButton>
       </div>
-      <div className="pt-4 flex justify-between flex-wrap gap-4"></div>
+      <div className="pt-4 flex justify-between flex-wrap gap-4">
+        {state.map((task) => (
+          <TaskCard id={task.id} title={task.title} task={task} />
+        ))}
+      </div>
     </div>
   );
 };

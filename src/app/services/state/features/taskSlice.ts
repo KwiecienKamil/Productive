@@ -1,4 +1,4 @@
-import { createSlice, current } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import dayjs from "dayjs";
 
 export interface Task {
@@ -6,7 +6,7 @@ export interface Task {
   title: string | undefined;
   doneDates: string[];
   isTaskDone: boolean;
-  DayStreak: number
+  DayStreak: number;
 }
 
 interface tasksState {

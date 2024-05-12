@@ -10,16 +10,15 @@ export async function POST(req: Request) {
         "SELECT Username FROM Users WHERE Username = ? AND Password = ?";
       const db = await pool.getConnection();
       const [result]: any = await db.execute(query, values);
+
       db.release();
 
       if (result.length > 0) {
-        // User with provided username and password exists
         return NextResponse.json({
           success: true,
           message: "SuccessFully Logged In",
         });
       } else {
-        // User with provided username and password does not exist
         return NextResponse.json({
           success: false,
           message: "Invalid username or password",

@@ -1,5 +1,5 @@
 "use client";
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import Diamonds from "./Diamonds";
 import { useAppSelector } from "@/app/services/state/store";
 
@@ -21,7 +21,6 @@ const MissionCompoment: FC<MissionCompomentProps> = ({
   state.map((item) => doneDates.push(item.doneDates.length));
   const numberOfTasksDone = doneDates.filter((item: number) => item > 0);
 
-
   return (
     <div className="flex flex-col gap-1" key={id}>
       <p>{title}</p>
@@ -33,7 +32,7 @@ const MissionCompoment: FC<MissionCompomentProps> = ({
               : "w-[80%] p-2 mt-1 bg-green-400 rounded-full overflow-hidden"
           }
         ></div>
-        <Diamonds value={value} />
+        <Diamonds value={value} numberToComplete={numberToComplete} />
       </div>
     </div>
   );

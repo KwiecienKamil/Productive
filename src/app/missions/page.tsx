@@ -9,7 +9,7 @@ const page = () => {
       <Navbar />
       <div className="max-h-screen w-[90%] px-4 text-xl">
         <h1 className=" text-sec font-bold">Missions</h1>
-        <div className="pt-3 flex gap-8">
+        <div className="pt-6 flex gap-8">
           <Quests />
           <DailyStreak />
         </div>
