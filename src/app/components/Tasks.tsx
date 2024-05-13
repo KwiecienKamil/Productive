@@ -5,20 +5,24 @@ import NavButton from "./ui/NavButton";
 import TaskCard from "./ui/TaskCard";
 import { useAppDispatch, useAppSelector } from "../services/state/store";
 import { addTask, removeTask } from "../services/state/features/taskSlice";
+import axios from "axios";
 
 const Tasks = () => {
   const dispatch = useAppDispatch();
   const state = useAppSelector((state) => state.task.tasks);
 
   const handleAddTask = () => {
-    dispatch(
-      addTask({
-        id: Math.floor(Math.random() * 99999),
-        title: "Task",
-        doneDates: [],
-        isTaskDone: false,
-      })
-    );
+    axios.post("http://localhost:3000/api/tasks", {}).then((res) => {
+      console.log(res);
+    });
+    // dispatch(
+    //   addTask({
+    //     id: Math.floor(Math.random() * 99999),
+    //     title: "Task",
+    //     doneDates: [],
+    //     isTaskDone: false,
+    //   })
+    // );
   };
 
   return (

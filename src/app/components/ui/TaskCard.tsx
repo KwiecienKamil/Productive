@@ -12,6 +12,7 @@ import {
 
 import { CiEdit } from "react-icons/ci";
 import { FaCheckSquare } from "react-icons/fa";
+import { SlOptionsVertical } from "react-icons/sl";
 
 type TaskCardProps = {
   id: number | undefined;
@@ -24,6 +25,7 @@ const TaskCard: FC<TaskCardProps> = ({ id, title, task }) => {
   const [taskDone, setTaskDone] = useState(false);
   const [editingTaskTitle, setEditingTaskTitle] = useState(false);
   const [newTaskTitle, setNewTaskTitle] = useState("");
+  const [showDeleteOption, setShowDeleteOption] = useState(false);
 
   const dispatch = useAppDispatch();
 
@@ -35,10 +37,6 @@ const TaskCard: FC<TaskCardProps> = ({ id, title, task }) => {
       dispatch(doneDate(task));
       setTaskDone(!taskDone);
     }
-  };
-
-  const handleRemove = () => {
-    dispatch(removeTask(task));
   };
 
   const handleNewTaskTitle = () => {
@@ -73,11 +71,25 @@ const TaskCard: FC<TaskCardProps> = ({ id, title, task }) => {
             <h2 className="card-title cursor-default">{title}</h2>
           )}
         </div>
-        <input
-          type="checkbox"
-          className="before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-md border border-blue-gray-200 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-8 before:w-8 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-sec checked:bg-sec checked:before:bg-sec hover:before:opacity-10"
-          onClick={handleTaskDone}
-        />
+        <div className="flex items-center gap-2">
+          <input
+            type="checkbox"
+            className="before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-md border border-blue-gray-200 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-8 before:w-8 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-sec checked:bg-sec checked:before:bg-sec hover:before:opacity-10"
+            onClick={handleTaskDone}
+          />
+          <SlOptionsVertical
+            className="cursor-pointer hover:text-gray-400 duration-300"
+            onClick={() => setShowDeleteOption(!showDeleteOption)}
+          />
+          {showDeleteOption ? (
+            <button
+              className="text-md text-red-500"
+              onClick={() => dispatch(removeTask(task))}
+            >
+              Delete
+            </button>
+          ) : null}
+        </div>
       </div>
       {currentMonth.map((row, i) => (
         <React.Fragment key={i}>
