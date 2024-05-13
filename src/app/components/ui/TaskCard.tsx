@@ -61,7 +61,7 @@ const TaskCard: FC<TaskCardProps> = ({ id, title, task }) => {
             <div className="flex items-center gap-2">
               <input
                 type="text"
-                className="w-[180px]"
+                className="w-[180px] text-black pl-2"
                 onChange={(e) => setNewTaskTitle(e.target.value)}
               />
               <FaCheckSquare

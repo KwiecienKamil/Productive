@@ -31,7 +31,7 @@ const Tasks = () => {
       </div>
       <div className="pt-4 flex justify-between flex-wrap gap-4">
         {state.map((task) => (
-          <TaskCard id={task.id} title={task.title} task={task} />
+          <TaskCard id={task.id} title={task.title} task={task} key={task.id} />
         ))}
       </div>
     </div>

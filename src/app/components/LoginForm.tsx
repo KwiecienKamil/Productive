@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { FC, FormEvent, useState } from "react";
 import { toast } from "sonner";
+import { signIn } from "next-auth/react";
 
 const LoginForm: FC = () => {
   const [username, setUsername] = useState("");

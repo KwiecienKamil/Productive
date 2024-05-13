@@ -7,7 +7,7 @@ export async function POST(req: Request) {
       const { username, password } = await req.json();
       const values = [username, password];
       const query =
-        "SELECT Username FROM Users WHERE Username = ? AND Password = ?";
+        "SELECT Username, User_id FROM Users WHERE Username = ? AND Password = ?";
       const db = await pool.getConnection();
       const [result]: any = await db.execute(query, values);
 
@@ -16,7 +16,8 @@ export async function POST(req: Request) {
       if (result.length > 0) {
         return NextResponse.json({
           success: true,
-          message: "SuccessFully Logged In",
+          message: "Successfully Logged In",
+          userData: result,
         });
       } else {
         return NextResponse.json({
