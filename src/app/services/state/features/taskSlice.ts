@@ -6,7 +6,7 @@ export interface Task {
   title: string | undefined;
   doneDates: string[];
   isTaskDone: boolean;
-  DayStreak: number;
+  currentUserId: number;
 }
 
 interface tasksState {

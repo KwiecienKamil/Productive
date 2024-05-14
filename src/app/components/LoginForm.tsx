@@ -4,9 +4,9 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { FC, FormEvent, useState } from "react";
 import { toast } from "sonner";
-import { signIn } from "next-auth/react";
 
 const LoginForm: FC = () => {
+  const [currentUserId, setCurrentUserId] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
@@ -23,6 +23,7 @@ const LoginForm: FC = () => {
           if (res.data.success === true) {
             toast.success("Successfully Logged In");
             router.push("/dashboard");
+            setCurrentUserId(res.data.userData[0].User_id);
           } else {
             toast.error("Wrong Username/Password");
           }
