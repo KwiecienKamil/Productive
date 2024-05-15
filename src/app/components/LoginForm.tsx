@@ -4,12 +4,22 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { FC, FormEvent, useState } from "react";
 import { toast } from "sonner";
+import { useAppDispatch, useAppSelector } from "../services/state/store";
+import { addTask } from "../services/state/features/taskSlice";
 
 const LoginForm: FC = () => {
-  const [currentUserId, setCurrentUserId] = useState("");
+  const [tasksState, setTasksState] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
+
+  const dispatch = useAppDispatch();
+
+  const handleGetTasks = () => {
+    axios
+      .get("http://localhost:3000/api/tasks", {})
+      .then((res) => dispatch(addTask(res.data)));
+  };
 
   const handleLogin = async (e: FormEvent) => {
     e.preventDefault();
@@ -23,7 +33,14 @@ const LoginForm: FC = () => {
           if (res.data.success === true) {
             toast.success("Successfully Logged In");
             router.push("/dashboard");
-            setCurrentUserId(res.data.userData[0].User_id);
+            localStorage.setItem(
+              "user",
+              JSON.stringify({
+                id: res.data.userData[0].User_id,
+                Username: username,
+              })
+            );
+            handleGetTasks();
           } else {
             toast.error("Wrong Username/Password");
           }

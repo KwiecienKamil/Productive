@@ -2,11 +2,11 @@ import { createSlice } from "@reduxjs/toolkit";
 import dayjs from "dayjs";
 
 export interface Task {
-  id: number | undefined;
-  title: string | undefined;
-  doneDates: string[];
+  Task_id: number | undefined;
+  Task_title: string | undefined;
+  Task_doneDates: string[];
   isTaskDone: boolean;
-  currentUserId: number;
+  User_id: number;
 }
 
 interface tasksState {
@@ -29,23 +29,23 @@ export const taskSlice = createSlice({
     },
     removeTask: (state, action) => {
       const updatedCart = state.tasks.filter(
-        (task) => task.id !== action.payload.id
+        (task) => task.Task_id !== action.payload.id
       );
       state.tasks = updatedCart;
       localStorage.setItem("tasks", JSON.stringify(state.tasks));
     },
     doneDate: (state, action) => {
       const currentTask = state.tasks.find(
-        (task) => task.id === action.payload.id
+        (task) => task.Task_id === action.payload.id
       );
 
       if (
-        currentTask?.doneDates.find(
+        currentTask?.Task_doneDates.find(
           (date) => date === dayjs().format("DD-MM-YY")
         )
       ) {
       } else {
-        currentTask?.doneDates.push(dayjs().format("DD-MM-YY"));
+        currentTask?.Task_doneDates.push(dayjs().format("DD-MM-YY"));
         currentTask!.isTaskDone = true;
       }
 
@@ -53,23 +53,23 @@ export const taskSlice = createSlice({
     },
     notDoneTask: (state, action) => {
       const currentTask = state.tasks.find(
-        (task) => task.id === action.payload.id
+        (task) => task.Task_id === action.payload.id
       );
 
-      const dateIndex = currentTask?.doneDates.indexOf(
+      const dateIndex = currentTask?.Task_doneDates.indexOf(
         dayjs().format("DD-MM-YY")
       );
-      currentTask?.doneDates.splice(dateIndex!, 1);
+      currentTask?.Task_doneDates.splice(dateIndex!, 1);
       currentTask!.isTaskDone = false;
 
       localStorage.setItem("tasks", JSON.stringify(state.tasks));
     },
     updateTaskTitle: (state, action) => {
       const currentTask = state.tasks.find(
-        (task) => task.id === action.payload.id
+        (task) => task.Task_id === action.payload.id
       );
 
-      currentTask!.title = action.payload.title;
+      currentTask!.Task_title = action.payload.title;
       localStorage.setItem("tasks", JSON.stringify(state.tasks));
     },
   },

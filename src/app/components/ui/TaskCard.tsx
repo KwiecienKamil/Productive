@@ -68,7 +68,7 @@ const TaskCard: FC<TaskCardProps> = ({ id, title, task }) => {
               />
             </div>
           ) : (
-            <h2 className="card-title cursor-default">{title}</h2>
+            <h2 className="card-title cursor-default">XD</h2>
           )}
         </div>
         <div className="flex items-center gap-2">

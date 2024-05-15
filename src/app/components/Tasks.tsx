@@ -4,25 +4,29 @@ import { FaPlus } from "react-icons/fa";
 import NavButton from "./ui/NavButton";
 import TaskCard from "./ui/TaskCard";
 import { useAppDispatch, useAppSelector } from "../services/state/store";
-import { addTask, removeTask } from "../services/state/features/taskSlice";
 import axios from "axios";
+import { addTask } from "../services/state/features/taskSlice";
 
 const Tasks = () => {
-  const dispatch = useAppDispatch();
   const state = useAppSelector((state) => state.task.tasks);
+  const CurrentUser = localStorage.getItem("user");
+  const parsedUser = JSON.parse(CurrentUser!);
+  const parsedUserId = parsedUser.id;
+  const taskName = "Task";
+
+  const dispatch = useAppDispatch();
+  console.log(state);
 
   const handleAddTask = () => {
-    axios.post("http://localhost:3000/api/tasks", {}).then((res) => {
-      console.log(res);
-    });
-    // dispatch(
-    //   addTask({
-    //     id: Math.floor(Math.random() * 99999),
-    //     title: "Task",
-    //     doneDates: [],
-    //     isTaskDone: false,
-    //   })
-    // );
+    axios
+      .post("http://localhost:3000/api/tasks", {
+        taskName,
+        parsedUserId,
+      })
+      .then((res) => {
+        console.log(res);
+      });
+    dispatch(addTask({ taskName, parsedUserId }));
   };
 
   return (
@@ -35,7 +39,12 @@ const Tasks = () => {
       </div>
       <div className="pt-4 flex justify-between flex-wrap gap-4">
         {state.map((task) => (
-          <TaskCard id={task.id} title={task.title} task={task} key={task.id} />
+          <TaskCard
+            id={task.Task_id}
+            title={task.Task_title}
+            task={task}
+            key={task.Task_id}
+          />
         ))}
       </div>
     </div>

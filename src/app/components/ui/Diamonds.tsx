@@ -10,7 +10,7 @@ type DiamondsProps = {
 const Diamonds: FC<DiamondsProps> = ({ value, numberToComplete }) => {
   const state = useAppSelector((state) => state.task.tasks);
   const doneDates: any = [];
-  state.map((item) => doneDates.push(item.doneDates.length));
+  state.map((item) => doneDates.push(item.Task_doneDates.length));
   const numberOfTasksDone = doneDates.filter((item: number) => item > 0);
 
   const handleAddDiamonds = () => {

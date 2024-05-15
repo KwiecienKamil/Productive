@@ -4,10 +4,9 @@ import { NextResponse } from "next/server";
 export async function POST(req: Request) {
   if (req.method === "POST") {
     try {
-      const { user_id, taskTitle, task_id, taskDoneDates } = await req.json();
-      const values = [task_id, taskTitle, taskDoneDates, user_id];
-      const query =
-        "INSERT INTO Tasks (Task_id, Task_title, Task_doneDates, User_id) VALUES (?, ?, ?, ?)";
+      const { taskName, parsedUserId } = await req.json();
+      const values = [taskName, parsedUserId];
+      const query = "INSERT INTO Tasks ( Task_title, User_id) VALUES (?, ?)";
       const db = await pool.getConnection();
       const [result]: any = await db.execute(query, values);
 
@@ -23,5 +22,25 @@ export async function POST(req: Request) {
     }
   } else {
     return NextResponse.json("FAILED");
+  }
+}
+
+export async function GET(request: Request) {
+  if (request.method === "GET") {
+    try {
+      const db = await pool.getConnection();
+      const query = "SELECT * FROM Tasks";
+      const [rows] = await db.execute(query);
+      db.release();
+
+      return NextResponse.json(rows);
+    } catch (error) {
+      return NextResponse.json(
+        {
+          error: error,
+        },
+        { status: 500 }
+      );
+    }
   }
 }
