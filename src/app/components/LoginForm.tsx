@@ -19,6 +19,9 @@ const LoginForm: FC = () => {
     axios
       .get("http://localhost:3000/api/tasks", {})
       .then((res) => dispatch(addTask(res.data)));
+    const tasks = localStorage.getItem("tasks");
+    setTasksState(tasks!);
+    console.log(tasksState);
   };
 
   const handleLogin = async (e: FormEvent) => {
