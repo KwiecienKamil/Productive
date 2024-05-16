@@ -17,7 +17,6 @@ const LoginForm: FC = () => {
 
   const handleGetTasks = () => {
     axios.get("http://localhost:3000/api/tasks", {}).then((res) => {
-      const parsedData = JSON.parse(res.data);
       localStorage.setItem("tasks", JSON.stringify(res.data));
     });
   };
