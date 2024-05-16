@@ -8,6 +8,7 @@ import { useAppSelector } from "../services/state/store";
 const Dashboard = () => {
   const state = useAppSelector((state) => state.task.tasks);
   console.log(state);
+
   return (
     <>
       <Navbar />

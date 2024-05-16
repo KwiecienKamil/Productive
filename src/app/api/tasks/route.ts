@@ -29,11 +29,12 @@ export async function GET(request: Request) {
   if (request.method === "GET") {
     try {
       const db = await pool.getConnection();
+
       const query = "SELECT * FROM Tasks";
-      const [rows] = await db.execute(query);
+      const [result] = await db.execute(query);
       db.release();
 
-      return NextResponse.json(rows);
+      return NextResponse.json(result);
     } catch (error) {
       return NextResponse.json(
         {

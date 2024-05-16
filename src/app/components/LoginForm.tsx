@@ -16,16 +16,15 @@ const LoginForm: FC = () => {
   const dispatch = useAppDispatch();
 
   const handleGetTasks = () => {
-    axios
-      .get("http://localhost:3000/api/tasks", {})
-      .then((res) => dispatch(addTask(res.data)));
-    const tasks = localStorage.getItem("tasks");
-    setTasksState(tasks!);
-    console.log(tasksState);
+    axios.get("http://localhost:3000/api/tasks", {}).then((res) => {
+      const parsedData = JSON.parse(res.data);
+      localStorage.setItem("tasks", JSON.stringify(res.data));
+    });
   };
 
   const handleLogin = async (e: FormEvent) => {
     e.preventDefault();
+    localStorage.clear();
     try {
       axios
         .post("http://localhost:3000/api/login", {
@@ -43,6 +42,7 @@ const LoginForm: FC = () => {
                 Username: username,
               })
             );
+
             handleGetTasks();
           } else {
             toast.error("Wrong Username/Password");
