@@ -13,6 +13,7 @@ import {
 import { CiEdit } from "react-icons/ci";
 import { FaCheckSquare } from "react-icons/fa";
 import { SlOptionsVertical } from "react-icons/sl";
+import axios from "axios";
 
 type TaskCardProps = {
   id: number | undefined;
@@ -40,8 +41,17 @@ const TaskCard: FC<TaskCardProps> = ({ id, title, task }) => {
   };
 
   const handleNewTaskTitle = () => {
-    dispatch(updateTaskTitle({ ...task, title: newTaskTitle }));
+    axios.post("http://localhost:3000/api/updateTask", {
+      newTaskTitle,
+      id,
+    });
+    dispatch(updateTaskTitle({ ...task, Task_title: newTaskTitle }));
     setEditingTaskTitle(!editingTaskTitle);
+  };
+
+  const handleRemoveTask = (id: any) => {
+    dispatch(removeTask(id));
+    axios.post("http://localhost:3000/api/removeTask", { id });
   };
 
   return (
@@ -82,10 +92,7 @@ const TaskCard: FC<TaskCardProps> = ({ id, title, task }) => {
             onClick={() => setShowDeleteOption(!showDeleteOption)}
           />
           {showDeleteOption ? (
-            <button
-              className="text-md text-red-500"
-              onClick={() => dispatch(removeTask(task))}
-            >
+            <button className="text-md text-red-500" onClick={handleRemoveTask}>
               Delete
             </button>
           ) : null}

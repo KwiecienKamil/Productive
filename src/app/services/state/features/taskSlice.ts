@@ -66,10 +66,10 @@ export const taskSlice = createSlice({
     },
     updateTaskTitle: (state, action) => {
       const currentTask = state.tasks.find(
-        (task) => task.Task_id === action.payload.id
+        (task) => task.Task_id === action.payload.Task_id
       );
 
-      currentTask!.Task_title = action.payload.title;
+      currentTask!.Task_title = action.payload.Task_title;
       localStorage.setItem("tasks", JSON.stringify(state.tasks));
     },
   },

@@ -25,12 +25,11 @@ const Tasks = () => {
       taskName,
       parsedUserId,
     });
-    dispatch(
-      addTask({
-        Task_title: taskName,
-        User_id: parsedUserId,
-      })
-    );
+    axios.get("http://localhost:3000/api/tasks").then((res) => {
+      localStorage.setItem("tasks", JSON.stringify(res.data));
+      dispatch(addTask(res.data));
+    });
+    window.location.reload();
   };
 
   return (
