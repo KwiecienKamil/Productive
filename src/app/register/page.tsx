@@ -12,28 +12,28 @@ const Register = () => {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    axios
-      .post("http://localhost:3000/api", {
-        username,
-        password,
-      })
-      .then((res) => {
-        if (res.status === 200) {
-          if (username.length > 4 && password.length > 4) {
+    if (username.length > 4 && password.length > 4) {
+      axios
+        .post("http://localhost:3000/api", {
+          username,
+          password,
+        })
+        .then((res) => {
+          if (res.status === 200) {
             toast.success("Successfully Registered, Now Login");
             router.push("/");
           } else {
-            toast.error("Username and password must be at least 5 characters");
+            toast.error("There was a problem, try again later");
           }
-        } else {
-          toast.error("There was a problem, try again later");
-        }
-      })
-      .catch((error) => {
-        if (error.code === "ERR_BAD_REQUEST") {
-          toast.error("There was a problem, try again later");
-        }
-      });
+        })
+        .catch((error) => {
+          if (error.code === "ERR_BAD_REQUEST") {
+            toast.error("There was a problem, try again later");
+          }
+        });
+    } else {
+      toast.error("Username and password must be at least 5 characters");
+    }
     setUsername("");
     setPassword("");
   };

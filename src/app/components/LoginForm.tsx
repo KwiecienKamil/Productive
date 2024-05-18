@@ -47,9 +47,7 @@ const LoginForm: FC = () => {
             toast.error("Wrong Username/Password");
           }
         });
-    } catch (err) {
-      console.log(err);
-    }
+    } catch (err) {}
     setUsername("");
     setPassword("");
   };

@@ -41,16 +41,16 @@ const TaskCard: FC<TaskCardProps> = ({ id, title, task }) => {
   };
 
   const handleNewTaskTitle = () => {
+    dispatch(updateTaskTitle({ ...task, Task_title: newTaskTitle }));
+    setEditingTaskTitle(!editingTaskTitle);
     axios.post("http://localhost:3000/api/updateTask", {
       newTaskTitle,
       id,
     });
-    dispatch(updateTaskTitle({ ...task, Task_title: newTaskTitle }));
-    setEditingTaskTitle(!editingTaskTitle);
   };
 
-  const handleRemoveTask = (id: any) => {
-    dispatch(removeTask(id));
+  const handleRemoveTask = () => {
+    dispatch(removeTask(task));
     axios.post("http://localhost:3000/api/removeTask", { id });
   };
 

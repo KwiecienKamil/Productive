@@ -15,21 +15,36 @@ const Tasks = () => {
   const taskName = "Task";
 
   const tasksStateForCurrentUser = state.filter(
-    (user: any) => user.User_id === parsedUserId
+    (task: any) => task.User_id === parsedUserId
   );
 
   const dispatch = useAppDispatch();
 
+  const handleGetTasks = () => {
+    axios.get("http://localhost:3000/api/tasks", {}).then((res) => {});
+  };
+
   const handleAddTask = () => {
-    axios.post("http://localhost:3000/api/tasks", {
-      taskName,
-      parsedUserId,
-    });
-    axios.get("http://localhost:3000/api/tasks").then((res) => {
-      localStorage.setItem("tasks", JSON.stringify(res.data));
-      dispatch(addTask(res.data));
-    });
-    window.location.reload();
+    axios
+      .post("http://localhost:3000/api/tasks", {
+        taskName,
+        parsedUserId,
+      })
+      .then((res) => {
+        if (res.status === 200) {
+          axios.get("http://localhost:3000/api/tasks", {}).then((res) => {
+            const addedTaskId = res.data[res.data.length - 1].Task_id;
+            dispatch(
+              addTask({
+                Task_id: addedTaskId,
+                Task_title: "Task",
+                Task_doneDates: "",
+                User_id: parsedUserId,
+              })
+            );
+          });
+        }
+      });
   };
 
   return (

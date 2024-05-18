@@ -6,7 +6,7 @@ export async function POST(req: Request) {
     try {
       const { taskName, parsedUserId } = await req.json();
       const values = [taskName, parsedUserId];
-      const query = "INSERT INTO Tasks ( Task_title, User_id) VALUES (?, ?)";
+      const query = "INSERT INTO Tasks (Task_title, User_id) VALUES (?, ?)";
       const db = await pool.getConnection();
       const [result]: any = await db.execute(query, values);
 

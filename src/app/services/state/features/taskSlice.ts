@@ -29,7 +29,7 @@ export const taskSlice = createSlice({
     },
     removeTask: (state, action) => {
       const updatedCart = state.tasks.filter(
-        (task) => task.Task_id !== action.payload.id
+        (task) => task.Task_id !== action.payload.Task_id
       );
       state.tasks = updatedCart;
       localStorage.setItem("tasks", JSON.stringify(state.tasks));
