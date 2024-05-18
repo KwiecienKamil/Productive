@@ -2,7 +2,7 @@
 import { getMonth } from "@/app/utils/Helpers";
 import React, { FC, useState } from "react";
 import Day from "./Day";
-import { useAppDispatch } from "@/app/services/state/store";
+import { useAppDispatch, useAppSelector } from "@/app/services/state/store";
 import {
   doneDate,
   notDoneTask,
@@ -14,29 +14,55 @@ import { CiEdit } from "react-icons/ci";
 import { FaCheckSquare } from "react-icons/fa";
 import { SlOptionsVertical } from "react-icons/sl";
 import axios from "axios";
+import dayjs from "dayjs";
+import { toast } from "sonner";
 
 type TaskCardProps = {
-  id: number | undefined;
+  Task_id: number | undefined;
   title: string | undefined;
   task: object;
 };
 
-const TaskCard: FC<TaskCardProps> = ({ id, title, task }) => {
+const TaskCard: FC<TaskCardProps> = ({ Task_id, title, task }) => {
   const [currentMonth, setCurrentMonth] = useState(getMonth());
   const [taskDone, setTaskDone] = useState(false);
   const [editingTaskTitle, setEditingTaskTitle] = useState(false);
   const [newTaskTitle, setNewTaskTitle] = useState("");
   const [showDeleteOption, setShowDeleteOption] = useState(false);
+  const TodaysDate = dayjs().format("DD-MM-YY");
 
   const dispatch = useAppDispatch();
 
   const handleTaskDone = () => {
     if (taskDone === true) {
-      dispatch(notDoneTask(task));
-      setTaskDone(!taskDone);
+      axios
+        .post("http://localhost:3000/api/deleteDoneDate", {
+          Task_id,
+        })
+        .then((res) => {
+          if (res.status === 200) {
+            dispatch(notDoneTask(task));
+            setTaskDone(!taskDone);
+          }
+        })
+        .catch((err) => {
+          toast.success("Something went wrong");
+        });
     } else {
-      dispatch(doneDate(task));
-      setTaskDone(!taskDone);
+      axios
+        .post("http://localhost:3000/api/addDoneDate", {
+          Task_id,
+          TodaysDate,
+        })
+        .then((res) => {
+          if (res.status === 200) {
+            dispatch(doneDate(task));
+            setTaskDone(!taskDone);
+          }
+        })
+        .catch((err) => {
+          toast.success("Something went wrong");
+        });
     }
   };
 
@@ -45,19 +71,19 @@ const TaskCard: FC<TaskCardProps> = ({ id, title, task }) => {
     setEditingTaskTitle(!editingTaskTitle);
     axios.post("http://localhost:3000/api/updateTask", {
       newTaskTitle,
-      id,
+      Task_id,
     });
   };
 
   const handleRemoveTask = () => {
     dispatch(removeTask(task));
-    axios.post("http://localhost:3000/api/removeTask", { id });
+    axios.post("http://localhost:3000/api/removeTask", { Task_id });
   };
 
   return (
     <div
       className="card w-96 bg-[#30343F] shadow-sm text-xl text-white pb-2"
-      key={id}
+      key={Task_id}
     >
       <div className="p-4 py-2 flex items-center justify-between">
         <div className="flex items-center gap-2">
@@ -102,7 +128,7 @@ const TaskCard: FC<TaskCardProps> = ({ id, title, task }) => {
         <React.Fragment key={i}>
           <div className="flex justify-between" key={i}>
             {row.map((day, idx) => (
-              <Day day={day} rowIdx={i} key={idx} taskId={id} />
+              <Day day={day} rowIdx={i} key={idx} Task_id={Task_id} />
             ))}
           </div>
         </React.Fragment>

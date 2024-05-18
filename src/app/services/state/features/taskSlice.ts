@@ -5,7 +5,7 @@ export interface Task {
   Task_id: number | undefined;
   Task_title: string | undefined;
   Task_doneDates: string[];
-  isTaskDone: boolean;
+  Task_isTaskDone: boolean;
   User_id: number;
 }
 
@@ -36,9 +36,8 @@ export const taskSlice = createSlice({
     },
     doneDate: (state, action) => {
       const currentTask = state.tasks.find(
-        (task) => task.Task_id === action.payload.id
+        (task) => task.Task_id === action.payload.Task_id
       );
-
       if (
         currentTask?.Task_doneDates.find(
           (date) => date === dayjs().format("DD-MM-YY")
@@ -46,21 +45,21 @@ export const taskSlice = createSlice({
       ) {
       } else {
         currentTask?.Task_doneDates.push(dayjs().format("DD-MM-YY"));
-        currentTask!.isTaskDone = true;
+        currentTask!.Task_isTaskDone = true;
       }
 
       localStorage.setItem("tasks", JSON.stringify(state.tasks));
     },
     notDoneTask: (state, action) => {
       const currentTask = state.tasks.find(
-        (task) => task.Task_id === action.payload.id
+        (task) => task.Task_id === action.payload.Task_id
       );
 
       const dateIndex = currentTask?.Task_doneDates.indexOf(
         dayjs().format("DD-MM-YY")
       );
       currentTask?.Task_doneDates.splice(dateIndex!, 1);
-      currentTask!.isTaskDone = false;
+      currentTask!.Task_isTaskDone = false;
 
       localStorage.setItem("tasks", JSON.stringify(state.tasks));
     },

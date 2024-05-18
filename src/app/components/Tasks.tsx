@@ -38,7 +38,8 @@ const Tasks = () => {
               addTask({
                 Task_id: addedTaskId,
                 Task_title: "Task",
-                Task_doneDates: "",
+                Task_doneDates: [],
+                Task_isTaskDone: false,
                 User_id: parsedUserId,
               })
             );
@@ -60,7 +61,7 @@ const Tasks = () => {
       <div className="pt-4 flex justify-between flex-wrap gap-4">
         {tasksStateForCurrentUser?.map((task: any) => (
           <TaskCard
-            id={task.Task_id}
+            Task_id={task.Task_id}
             title={task.Task_title}
             task={task}
             key={task.Task_id}

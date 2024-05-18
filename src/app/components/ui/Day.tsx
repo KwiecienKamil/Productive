@@ -6,20 +6,25 @@ import { useState } from "react";
 type DayProps = {
   day: dayjs.Dayjs;
   rowIdx: number;
-  taskId: number | undefined;
+  Task_id: number | undefined;
 };
 
-const Day = ({ day, rowIdx, taskId }: DayProps) => {
+const Day = ({ day, rowIdx, Task_id }: DayProps) => {
   const state = useAppSelector((state) => state.task.tasks);
 
-  const currentTask = state.find((currentTask) => currentTask.id === taskId);
-  const currentDoneDates = currentTask?.doneDates;
-  const isCurrentTaskDone = currentTask?.isTaskDone;
+  const currentTask = state.find(
+    (currentTask) => currentTask.Task_id === Task_id
+  );
+  const currentDoneDates = currentTask?.Task_doneDates;
 
   const getCurrentDay = () => {
-    return currentDoneDates?.find((date) => date === day.format("DD-MM-YY"))
-      ? "currentDay"
-      : "notCurrentDay";
+    if (currentDoneDates?.length === 0) {
+      return "notCurrentDay";
+    } else {
+      return currentDoneDates?.find((date) => date === day.format("DD-MM-YY"))
+        ? "currentDay"
+        : "notCurrentDay";
+    }
   };
   return (
     <div

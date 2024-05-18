@@ -4,6 +4,7 @@ import Navbar from "../components/Navbar";
 import Tasks from "../components/Tasks";
 import Rewards from "../components/Rewards";
 import { useAppSelector } from "../services/state/store";
+import dayjs from "dayjs";
 
 const Dashboard = () => {
   const state = useAppSelector((state) => state.task.tasks);

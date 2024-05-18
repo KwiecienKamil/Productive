@@ -4,9 +4,9 @@ import { NextResponse } from "next/server";
 export async function POST(req: Request) {
   if (req.method === "POST") {
     try {
-      const { newTaskTitle, Task_id } = await req.json();
-      const values = [newTaskTitle, Task_id];
-      const query = "UPDATE Tasks SET Task_title = ? WHERE Task_id = ?";
+      const { Task_id } = await req.json();
+      const values = [Task_id];
+      const query = "DELETE FROM doneDates WHERE Task_id = ?";
       const db = await pool.getConnection();
       const [result]: any = await db.execute(query, values);
 
