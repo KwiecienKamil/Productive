@@ -2,7 +2,7 @@
 import { getMonth } from "@/app/utils/Helpers";
 import React, { FC, useState } from "react";
 import Day from "./Day";
-import { useAppDispatch, useAppSelector } from "@/app/services/state/store";
+import { useAppDispatch } from "@/app/services/state/store";
 import {
   doneDate,
   notDoneTask,
@@ -38,6 +38,7 @@ const TaskCard: FC<TaskCardProps> = ({ Task_id, title, task }) => {
       axios
         .post("http://localhost:3000/api/deleteDoneDate", {
           Task_id,
+          TodaysDate,
         })
         .then((res) => {
           if (res.status === 200) {
@@ -76,8 +77,21 @@ const TaskCard: FC<TaskCardProps> = ({ Task_id, title, task }) => {
   };
 
   const handleRemoveTask = () => {
-    dispatch(removeTask(task));
-    axios.post("http://localhost:3000/api/removeTask", { Task_id });
+    axios
+      .post("http://localhost:3000/api/removeAllDoneDates", { Task_id })
+      .then((res) => {
+        if (res.status === 200) {
+          axios
+            .post("http://localhost:3000/api/removeTask", { Task_id })
+            .then((res) => {
+              if (res.status === 200) {
+                dispatch(removeTask(task));
+              } else {
+                toast.error("Something went wrong");
+              }
+            });
+        }
+      });
   };
 
   return (
