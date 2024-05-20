@@ -18,7 +18,6 @@ const MissionCompoment: FC<MissionCompomentProps> = ({
 }) => {
   const state = useAppSelector((state) => state.task.tasks);
   const doneDates: any = [];
-  state.map((item) => doneDates.push(item.doneDates.length));
   const numberOfTasksDone = doneDates.filter((item: number) => item > 0);
 
   return (
