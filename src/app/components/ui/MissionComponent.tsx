@@ -17,8 +17,9 @@ const MissionCompoment: FC<MissionCompomentProps> = ({
   numberToComplete,
 }) => {
   const state = useAppSelector((state) => state.task.tasks);
-  const doneDates: any = [];
-  const numberOfTasksDone = doneDates.filter((item: number) => item > 0);
+  const numberOfTasksDone = state.filter(
+    (item) => item.Task_doneDates.length > 0
+  );
 
   return (
     <div className="flex flex-col gap-1" key={id}>
