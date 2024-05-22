@@ -1,7 +1,5 @@
 import { useAppSelector } from "@/app/services/state/store";
-import { log } from "console";
 import dayjs from "dayjs";
-import { useState } from "react";
 
 type DayProps = {
   day: dayjs.Dayjs;

@@ -1,5 +1,4 @@
 import { SlPresent } from "react-icons/sl";
-import NavButton from "./ui/NavButton";
 import Link from "next/link";
 
 const Rewards = () => {

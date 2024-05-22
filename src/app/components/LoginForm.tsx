@@ -4,16 +4,11 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { FC, FormEvent, useState } from "react";
 import { toast } from "sonner";
-import { useAppDispatch, useAppSelector } from "../services/state/store";
-import { addTask } from "../services/state/features/taskSlice";
 
 const LoginForm: FC = () => {
-  const [tasksState, setTasksState] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
-
-  const dispatch = useAppDispatch();
 
   const handleGetTasks = () => {
     axios.get("http://localhost:3000/api/tasks", {}).then((res) => {
