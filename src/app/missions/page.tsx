@@ -2,7 +2,6 @@ import React from "react";
 import Quests from "../components/Quests";
 import DailyStreak from "../components/DailyStreak";
 import Navbar from "../components/Navbar";
-import { useAppSelector } from "../services/state/store";
 
 const page = () => {
   return (
