@@ -1,5 +1,7 @@
 import { useAppSelector } from "@/app/services/state/store";
+import axios from "axios";
 import dayjs from "dayjs";
+import { useEffect, useState } from "react";
 
 type DayProps = {
   day: dayjs.Dayjs;
@@ -8,6 +10,7 @@ type DayProps = {
 };
 
 const Day = ({ day, rowIdx, Task_id }: DayProps) => {
+  const [doneDates, setDoneDates] = useState();
   const state = useAppSelector((state) => state.task.tasks);
 
   const currentTask = state.find(

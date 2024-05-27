@@ -36,7 +36,6 @@ const LoginForm: FC = () => {
                 Username: username,
               })
             );
-
             handleGetTasks();
           } else {
             toast.error("Wrong Username/Password");

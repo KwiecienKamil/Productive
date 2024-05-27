@@ -18,11 +18,9 @@ const Tasks = () => {
     (task: any) => task.User_id === parsedUserId
   );
 
-  const dispatch = useAppDispatch();
+  console.log(state);
 
-  const handleGetTasks = () => {
-    axios.get("http://localhost:3000/api/tasks", {}).then((res) => {});
-  };
+  const dispatch = useAppDispatch();
 
   const handleAddTask = () => {
     axios
