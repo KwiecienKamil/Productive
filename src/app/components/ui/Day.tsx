@@ -1,7 +1,6 @@
 import { useAppSelector } from "@/app/services/state/store";
-import axios from "axios";
 import dayjs from "dayjs";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 type DayProps = {
   day: dayjs.Dayjs;
