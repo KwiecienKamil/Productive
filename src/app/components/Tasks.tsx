@@ -6,8 +6,10 @@ import TaskCard from "./ui/TaskCard";
 import { useAppDispatch, useAppSelector } from "../services/state/store";
 import axios from "axios";
 import { addTask } from "../services/state/features/taskSlice";
+import { useState } from "react";
 
 const Tasks = () => {
+  const [doneDates, setDoneDates] = useState();
   const state = useAppSelector((state) => state.task.tasks);
   const CurrentUser = localStorage.getItem("user");
   const parsedUser = JSON.parse(CurrentUser!);
@@ -17,8 +19,6 @@ const Tasks = () => {
   const tasksStateForCurrentUser = state.filter(
     (task: any) => task.User_id === parsedUserId
   );
-
-  console.log(state);
 
   const dispatch = useAppDispatch();
 

@@ -31,6 +31,17 @@ const TaskCard: FC<TaskCardProps> = ({ Task_id, title, task }) => {
   const [showDeleteOption, setShowDeleteOption] = useState(false);
   const TodaysDate = dayjs().format("DD-MM-YY");
 
+  const getDoneDatesFromLocalStorage = localStorage.getItem("doneDates");
+  const parsedDoneDates = JSON.parse(getDoneDatesFromLocalStorage!);
+  const parsedDoneDatesForCurrentUser = parsedDoneDates.filter(
+    (user: any) => user.Task_id === Task_id
+  );
+
+  // Final doneDates in array
+  const doneDates = parsedDoneDatesForCurrentUser.map(
+    (item: any) => item.Task_doneDate
+  );
+
   const dispatch = useAppDispatch();
 
   const handleTaskDone = () => {
@@ -142,7 +153,7 @@ const TaskCard: FC<TaskCardProps> = ({ Task_id, title, task }) => {
         <React.Fragment key={i}>
           <div className="flex justify-between" key={i}>
             {row.map((day, idx) => (
-              <Day day={day} rowIdx={i} key={idx} Task_id={Task_id} />
+              <Day day={day} rowIdx={i} key={idx} doneDates={doneDates} />
             ))}
           </div>
         </React.Fragment>

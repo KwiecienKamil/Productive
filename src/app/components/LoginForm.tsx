@@ -11,8 +11,14 @@ const LoginForm: FC = () => {
   const router = useRouter();
 
   const handleGetTasks = () => {
-    axios.get("http://localhost:3000/api/tasks", {}).then((res) => {
+    axios.get("http://localhost:3000/api/tasks").then((res) => {
       localStorage.setItem("tasks", JSON.stringify(res.data));
+    });
+  };
+
+  const handleGetDoneDates = () => {
+    axios.get("http://localhost:3000/api/getDoneDates").then((res) => {
+      localStorage.setItem("doneDates", JSON.stringify(res.data));
     });
   };
 
@@ -37,6 +43,7 @@ const LoginForm: FC = () => {
               })
             );
             handleGetTasks();
+            handleGetDoneDates();
           } else {
             toast.error("Wrong Username/Password");
           }

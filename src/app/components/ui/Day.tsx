@@ -1,27 +1,17 @@
-import { useAppSelector } from "@/app/services/state/store";
 import dayjs from "dayjs";
-import { useState } from "react";
 
 type DayProps = {
   day: dayjs.Dayjs;
   rowIdx: number;
-  Task_id: number | undefined;
+  doneDates: string[];
 };
 
-const Day = ({ day, rowIdx, Task_id }: DayProps) => {
-  const [doneDates, setDoneDates] = useState();
-  const state = useAppSelector((state) => state.task.tasks);
-
-  const currentTask = state.find(
-    (currentTask) => currentTask.Task_id === Task_id
-  );
-  const currentDoneDates = currentTask?.Task_doneDates;
-
+const Day = ({ day, rowIdx, doneDates }: DayProps) => {
   const getCurrentDay = () => {
-    if (currentDoneDates?.length === 0) {
+    if (doneDates?.length === 0) {
       return "notCurrentDay";
     } else {
-      return currentDoneDates?.find((date) => date === day.format("DD-MM-YY"))
+      return doneDates?.find((date) => date === day.format("DD-MM-YY"))
         ? "currentDay"
         : "notCurrentDay";
     }
