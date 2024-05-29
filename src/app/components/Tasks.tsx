@@ -9,7 +9,6 @@ import { addTask } from "../services/state/features/taskSlice";
 import { useState } from "react";
 
 const Tasks = () => {
-  const [doneDates, setDoneDates] = useState();
   const state = useAppSelector((state) => state.task.tasks);
   const CurrentUser = localStorage.getItem("user");
   const parsedUser = JSON.parse(CurrentUser!);
@@ -36,7 +35,6 @@ const Tasks = () => {
               addTask({
                 Task_id: addedTaskId,
                 Task_title: "Task",
-                Task_doneDates: [],
                 Task_isTaskDone: false,
                 User_id: parsedUserId,
               })

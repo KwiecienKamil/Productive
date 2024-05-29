@@ -34,22 +34,7 @@ export const taskSlice = createSlice({
       state.tasks = updatedCart;
       localStorage.setItem("tasks", JSON.stringify(state.tasks));
     },
-    doneDate: (state, action) => {
-      const currentTask = state.tasks.find(
-        (task) => task.Task_id === action.payload.Task_id
-      );
-      if (
-        currentTask?.Task_doneDates.find(
-          (date) => date === dayjs().format("DD-MM-YY")
-        )
-      ) {
-      } else {
-        currentTask?.Task_doneDates.push(dayjs().format("DD-MM-YY"));
-        currentTask!.Task_isTaskDone = true;
-      }
 
-      localStorage.setItem("tasks", JSON.stringify(state.tasks));
-    },
     notDoneTask: (state, action) => {
       const currentTask = state.tasks.find(
         (task) => task.Task_id === action.payload.Task_id
@@ -75,5 +60,5 @@ export const taskSlice = createSlice({
 });
 
 export default taskSlice.reducer;
-export const { addTask, removeTask, doneDate, notDoneTask, updateTaskTitle } =
+export const { addTask, removeTask, notDoneTask, updateTaskTitle } =
   taskSlice.actions;

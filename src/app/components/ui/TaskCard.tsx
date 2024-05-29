@@ -2,9 +2,8 @@
 import { getMonth } from "@/app/utils/Helpers";
 import React, { FC, useState } from "react";
 import Day from "./Day";
-import { useAppDispatch } from "@/app/services/state/store";
+import { useAppDispatch, useAppSelector } from "@/app/services/state/store";
 import {
-  doneDate,
   notDoneTask,
   removeTask,
   updateTaskTitle,
@@ -16,6 +15,10 @@ import { SlOptionsVertical } from "react-icons/sl";
 import axios from "axios";
 import dayjs from "dayjs";
 import { toast } from "sonner";
+import {
+  addDoneDate,
+  removeDoneDate,
+} from "@/app/services/state/features/doneDateSlice";
 
 type TaskCardProps = {
   Task_id: number | undefined;
@@ -31,16 +34,11 @@ const TaskCard: FC<TaskCardProps> = ({ Task_id, title, task }) => {
   const [showDeleteOption, setShowDeleteOption] = useState(false);
   const TodaysDate = dayjs().format("DD-MM-YY");
 
-  const getDoneDatesFromLocalStorage = localStorage.getItem("doneDates");
-  const parsedDoneDates = JSON.parse(getDoneDatesFromLocalStorage!);
-  const parsedDoneDatesForCurrentUser = parsedDoneDates.filter(
-    (user: any) => user.Task_id === Task_id
-  );
+  const state = useAppSelector((state) => state.doneDate.doneDates);
 
   // Final doneDates in array
-  const doneDates = parsedDoneDatesForCurrentUser.map(
-    (item: any) => item.Task_doneDate
-  );
+  const doneDates = state.map((item: any) => item.Task_doneDate);
+  console.log(doneDates);
 
   const dispatch = useAppDispatch();
 
@@ -55,10 +53,11 @@ const TaskCard: FC<TaskCardProps> = ({ Task_id, title, task }) => {
           if (res.status === 200) {
             dispatch(notDoneTask(task));
             setTaskDone(!taskDone);
+            dispatch(removeDoneDate(task));
           }
         })
         .catch((err) => {
-          toast.success("Something went wrong");
+          console.log(err);
         });
     } else {
       axios
@@ -68,8 +67,11 @@ const TaskCard: FC<TaskCardProps> = ({ Task_id, title, task }) => {
         })
         .then((res) => {
           if (res.status === 200) {
-            dispatch(doneDate(task));
+            axios.get("http://localhost:3000/api/getDoneDates").then((res) => {
+              localStorage.setItem("doneDates", JSON.stringify(res.data));
+            });
             setTaskDone(!taskDone);
+            dispatch(addDoneDate(task));
           }
         })
         .catch((err) => {

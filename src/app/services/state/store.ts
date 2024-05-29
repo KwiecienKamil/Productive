@@ -3,10 +3,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { taskSlice } from "./features/taskSlice";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
+import { doneDateSlice } from "./features/doneDateSlice";
 
 export const store = configureStore({
   reducer: {
     task: taskSlice.reducer,
+    doneDate: doneDateSlice.reducer,
   },
 });
 
