@@ -8,20 +8,18 @@ type DiamondsProps = {
 };
 
 const Diamonds: FC<DiamondsProps> = ({ value, numberToComplete }) => {
-  const state = useAppSelector((state) => state.task.tasks);
+  const state = useAppSelector((state) => state.doneDate.doneDates);
 
-  const numberOfTasksDone = state.filter(
-    (item) => item.Task_doneDates.length > 0
-  );
+  const numberOfTasksDone = state.length - 1;
 
   const handleAddDiamonds = () => {
-    if (numberOfTasksDone.length < numberToComplete) {
+    if (numberOfTasksDone < numberToComplete) {
     }
   };
   return (
     <div
       className={
-        numberOfTasksDone.length < numberToComplete
+        numberOfTasksDone < numberToComplete
           ? "flex items-center gap-1 bg-lightGray text-sec p-1 rounded-xl cursor-default"
           : "flex items-center gap-1 bg-pri text-black p-1 rounded-xl cursor-pointer"
       }
