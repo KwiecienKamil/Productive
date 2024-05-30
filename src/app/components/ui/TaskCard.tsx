@@ -39,7 +39,9 @@ const TaskCard: FC<TaskCardProps> = ({ Task_id, title, task }) => {
   // Final doneDates in array
   const doneDates = state.filter((date: any) => date.Task_id === Task_id);
   const finalDoneDates = doneDates.map((item) => item.Task_doneDate);
-  console.log(doneDates);
+
+  const diamondsState = useAppSelector((state) => state.diamonds.diamonds);
+  console.log(diamondsState);
 
   const dispatch = useAppDispatch();
 

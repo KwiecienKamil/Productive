@@ -6,7 +6,6 @@ import TaskCard from "./ui/TaskCard";
 import { useAppDispatch, useAppSelector } from "../services/state/store";
 import axios from "axios";
 import { addTask } from "../services/state/features/taskSlice";
-import { useState } from "react";
 
 const Tasks = () => {
   const state = useAppSelector((state) => state.task.tasks);
