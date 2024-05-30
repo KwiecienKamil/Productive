@@ -37,7 +37,8 @@ const TaskCard: FC<TaskCardProps> = ({ Task_id, title, task }) => {
   const state = useAppSelector((state) => state.doneDate.doneDates);
 
   // Final doneDates in array
-  const doneDates = state.map((item: any) => item.Task_doneDate);
+  const doneDates = state.filter((date: any) => date.Task_id === Task_id);
+  const finalDoneDates = doneDates.map((item) => item.Task_doneDate);
   console.log(doneDates);
 
   const dispatch = useAppDispatch();
@@ -51,9 +52,13 @@ const TaskCard: FC<TaskCardProps> = ({ Task_id, title, task }) => {
         })
         .then((res) => {
           if (res.status === 200) {
-            dispatch(notDoneTask(task));
             setTaskDone(!taskDone);
-            dispatch(removeDoneDate(task));
+            dispatch(
+              removeDoneDate({
+                Task_id,
+                Task_doneDate: dayjs().format("DD-MM-YY"),
+              })
+            );
           }
         })
         .catch((err) => {
@@ -71,7 +76,12 @@ const TaskCard: FC<TaskCardProps> = ({ Task_id, title, task }) => {
               localStorage.setItem("doneDates", JSON.stringify(res.data));
             });
             setTaskDone(!taskDone);
-            dispatch(addDoneDate(task));
+            dispatch(
+              addDoneDate({
+                Task_id,
+                Task_doneDate: dayjs().format("DD-MM-YY"),
+              })
+            );
           }
         })
         .catch((err) => {
@@ -155,7 +165,7 @@ const TaskCard: FC<TaskCardProps> = ({ Task_id, title, task }) => {
         <React.Fragment key={i}>
           <div className="flex justify-between" key={i}>
             {row.map((day, idx) => (
-              <Day day={day} rowIdx={i} key={idx} doneDates={doneDates} />
+              <Day day={day} rowIdx={i} key={idx} doneDates={finalDoneDates} />
             ))}
           </div>
         </React.Fragment>

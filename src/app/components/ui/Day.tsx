@@ -3,7 +3,7 @@ import dayjs from "dayjs";
 type DayProps = {
   day: dayjs.Dayjs;
   rowIdx: number;
-  doneDates: string[];
+  doneDates: (string | undefined)[];
 };
 
 const Day = ({ day, rowIdx, doneDates }: DayProps) => {

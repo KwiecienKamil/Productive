@@ -33,6 +33,8 @@ export const doneDateSlice = createSlice({
         (date: any) => date.Task_doneDate !== dayjs().format("DD-MM-YY")
       );
 
+      state.doneDates = updatedDoneDatesState;
+
       localStorage.setItem("doneDates", JSON.stringify(updatedDoneDatesState));
     },
   },
