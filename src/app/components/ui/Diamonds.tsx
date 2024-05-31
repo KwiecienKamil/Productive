@@ -21,10 +21,11 @@ const Diamonds: FC<DiamondsProps> = ({ value, numberToComplete }) => {
   const numberOfTasksDone = tasksState.length - 1;
 
   const handleAddDiamonds = () => {
-    if (numberOfTasksDone < numberToComplete) {
+    if (numberOfTasksDone < numberToComplete && state.length > 0) {
     } else {
       dispatch(addDiamonds({ User_id: currentUserId.id, value }));
       toast.success(`Successfully added ${value} diamonds`);
+      setDiamondsReceived(true);
     }
   };
   return (
@@ -32,7 +33,7 @@ const Diamonds: FC<DiamondsProps> = ({ value, numberToComplete }) => {
       className={
         diamondsReceived
           ? "flex items-center gap-1 bg-green-400 text-black p-1 rounded-xl cursor-pointer"
-          : numberOfTasksDone < numberToComplete
+          : numberOfTasksDone < numberToComplete && state.length > 0
           ? "flex items-center gap-1 bg-lightGray text-sec p-1 rounded-xl cursor-default"
           : "flex items-center gap-1 bg-pri text-black p-1 rounded-xl cursor-pointer"
       }

@@ -16,8 +16,9 @@ const MissionCompoment: FC<MissionCompomentProps> = ({
   id,
   numberToComplete,
 }) => {
+  const tasksState = useAppSelector((state) => state.task.tasks);
   const state = useAppSelector((state) => state.doneDate.doneDates);
-  const numberOfTasksDone = state.length - 1;
+  const numberOfTasksDone = tasksState.length - 1;
 
   return (
     <div className="flex flex-col gap-1" key={id}>
@@ -25,7 +26,7 @@ const MissionCompoment: FC<MissionCompomentProps> = ({
       <div className="flex items-center justify-between">
         <div
           className={
-            numberOfTasksDone < numberToComplete
+            numberOfTasksDone < numberToComplete && state.length > 0
               ? "w-[80%] p-2 mt-1 bg-[#DCDCDC] rounded-full overflow-hidden"
               : "w-[80%] p-2 mt-1 bg-green-400 rounded-full overflow-hidden"
           }
