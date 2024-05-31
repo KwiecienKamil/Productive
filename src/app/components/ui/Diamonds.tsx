@@ -1,6 +1,6 @@
 import { addDiamonds } from "@/app/services/state/features/diamondsSlice";
 import { useAppDispatch, useAppSelector } from "@/app/services/state/store";
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import { IoDiamondSharp } from "react-icons/io5";
 import { toast } from "sonner";
 
@@ -10,13 +10,15 @@ type DiamondsProps = {
 };
 
 const Diamonds: FC<DiamondsProps> = ({ value, numberToComplete }) => {
+  const [diamondsReceived, setDiamondsReceived] = useState(false);
   const state = useAppSelector((state) => state.doneDate.doneDates);
+  const tasksState = useAppSelector((state) => state.task.tasks);
 
   const dispatch = useAppDispatch();
   const currentUser = localStorage.getItem("user");
   const currentUserId = JSON.parse(currentUser!);
 
-  const numberOfTasksDone = state.length - 1;
+  const numberOfTasksDone = tasksState.length - 1;
 
   const handleAddDiamonds = () => {
     if (numberOfTasksDone < numberToComplete) {
@@ -28,7 +30,9 @@ const Diamonds: FC<DiamondsProps> = ({ value, numberToComplete }) => {
   return (
     <div
       className={
-        numberOfTasksDone < numberToComplete
+        diamondsReceived
+          ? "flex items-center gap-1 bg-green-400 text-black p-1 rounded-xl cursor-pointer"
+          : numberOfTasksDone < numberToComplete
           ? "flex items-center gap-1 bg-lightGray text-sec p-1 rounded-xl cursor-default"
           : "flex items-center gap-1 bg-pri text-black p-1 rounded-xl cursor-pointer"
       }
