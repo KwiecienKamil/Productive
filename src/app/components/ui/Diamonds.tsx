@@ -3,6 +3,7 @@ import { useAppDispatch, useAppSelector } from "@/app/services/state/store";
 import React, { FC, useState } from "react";
 import { IoDiamondSharp } from "react-icons/io5";
 import { toast } from "sonner";
+import { MdDone } from "react-icons/md";
 
 type DiamondsProps = {
   value: number;
@@ -28,12 +29,14 @@ const Diamonds: FC<DiamondsProps> = ({ value, numberToComplete }) => {
       setDiamondsReceived(true);
     }
   };
-  return (
+  return diamondsReceived ? (
+    <div className="flex items-center justify-center pr-2">
+      <MdDone className="text-green-500" />
+    </div>
+  ) : (
     <div
       className={
-        diamondsReceived
-          ? "flex items-center gap-1 bg-green-400 text-black p-1 rounded-xl cursor-pointer"
-          : numberOfTasksDone < numberToComplete && state.length > 0
+        numberOfTasksDone < numberToComplete && state.length > 0
           ? "flex items-center gap-1 bg-lightGray text-sec p-1 rounded-xl cursor-default"
           : "flex items-center gap-1 bg-pri text-black p-1 rounded-xl cursor-pointer"
       }

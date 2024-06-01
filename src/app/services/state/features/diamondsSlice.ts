@@ -20,7 +20,7 @@ export const diamondsSlice = createSlice({
   initialState,
   reducers: {
     addDiamonds: (state, action) => {
-      const newValue = (state.diamonds += action.payload.value);
+      const newValue = state.diamonds + action.payload.value;
       state.diamonds = newValue;
       localStorage.setItem("diamonds", JSON.stringify(state.diamonds));
     },
