@@ -18,7 +18,7 @@ const MissionCompoment: FC<MissionCompomentProps> = ({
 }) => {
   const tasksState = useAppSelector((state) => state.task.tasks);
   const state = useAppSelector((state) => state.doneDate.doneDates);
-  const numberOfTasksDone = tasksState.length - 1;
+  const numberOfTasksDone = tasksState.length;
 
   return (
     <div className="flex flex-col gap-1" key={id}>
@@ -31,7 +31,11 @@ const MissionCompoment: FC<MissionCompomentProps> = ({
               : "w-[80%] p-2 mt-1 bg-green-400 rounded-full overflow-hidden"
           }
         ></div>
-        <Diamonds value={value} numberToComplete={numberToComplete} />
+        <Diamonds
+          value={value}
+          numberToComplete={numberToComplete}
+          missionId={id}
+        />
       </div>
     </div>
   );

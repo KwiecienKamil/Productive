@@ -8,9 +8,14 @@ import { MdDone } from "react-icons/md";
 type DiamondsProps = {
   value: number;
   numberToComplete: number;
+  missionId: number;
 };
 
-const Diamonds: FC<DiamondsProps> = ({ value, numberToComplete }) => {
+const Diamonds: FC<DiamondsProps> = ({
+  value,
+  numberToComplete,
+  missionId,
+}) => {
   const [diamondsReceived, setDiamondsReceived] = useState(false);
   const state = useAppSelector((state) => state.doneDate.doneDates);
   const tasksState = useAppSelector((state) => state.task.tasks);
@@ -19,7 +24,7 @@ const Diamonds: FC<DiamondsProps> = ({ value, numberToComplete }) => {
   const currentUser = localStorage.getItem("user");
   const currentUserId = JSON.parse(currentUser!);
 
-  const numberOfTasksDone = tasksState.length - 1;
+  const numberOfTasksDone = tasksState.length;
 
   const handleAddDiamonds = () => {
     if (numberOfTasksDone < numberToComplete && state.length > 0) {
@@ -27,6 +32,15 @@ const Diamonds: FC<DiamondsProps> = ({ value, numberToComplete }) => {
       dispatch(addDiamonds({ User_id: currentUserId.id, value }));
       toast.success(`Successfully added ${value} diamonds`);
       setDiamondsReceived(true);
+      localStorage.setItem(
+        "missions",
+        JSON.stringify({ missionId, isDone: true })
+      );
+      const getMissions = localStorage?.getItem("missions");
+      const parsedMissions = JSON.parse(getMissions!);
+      const currentMission = parsedMissions.filter(
+        (item: any) => item.missionId === missionId
+      );
     }
   };
   return diamondsReceived ? (
