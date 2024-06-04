@@ -26,14 +26,6 @@ const Diamonds: FC<DiamondsProps> = ({
 
   const numberOfTasksDone = tasksState.length;
 
-  const handleTaskComplete = () => {
-    const getMissions = localStorage?.getItem("missions");
-    const parsedMissions = JSON.parse(getMissions!);
-    const currentMission = parsedMissions.filter(
-      (item: any) => item.missionId === missionId
-    );
-  };
-
   const handleAddDiamonds = () => {
     if (numberOfTasksDone < numberToComplete && state.length > 0) {
     } else {
