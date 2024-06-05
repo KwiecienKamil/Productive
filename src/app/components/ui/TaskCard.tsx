@@ -4,7 +4,6 @@ import React, { FC, useState } from "react";
 import Day from "./Day";
 import { useAppDispatch, useAppSelector } from "@/app/services/state/store";
 import {
-  notDoneTask,
   removeTask,
   updateTaskTitle,
 } from "@/app/services/state/features/taskSlice";
