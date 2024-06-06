@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 export interface Diamond {
   User_id: number | undefined;
-  value: number;
+  value: number | undefined;
 }
 
 interface diamondsState {
@@ -20,8 +20,7 @@ export const diamondsSlice = createSlice({
   initialState,
   reducers: {
     addDiamonds: (state, action) => {
-      const newValue = state.diamonds + action.payload.value;
-      state.diamonds = newValue;
+      state.diamonds.push(action.payload);
       localStorage.setItem("diamonds", JSON.stringify(state.diamonds));
     },
   },

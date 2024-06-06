@@ -19,6 +19,7 @@ const Diamonds: FC<DiamondsProps> = ({
   const [diamondsReceived, setDiamondsReceived] = useState(false);
   const state = useAppSelector((state) => state.doneDate.doneDates);
   const tasksState = useAppSelector((state) => state.task.tasks);
+  const diamondsState = useAppSelector((state) => state.diamonds.diamonds);
 
   const dispatch = useAppDispatch();
   const currentUser = localStorage.getItem("user");
@@ -34,10 +35,15 @@ const Diamonds: FC<DiamondsProps> = ({
       setDiamondsReceived(true);
       localStorage.setItem(
         "missions",
-        JSON.stringify({ missionId, isDone: true })
+        JSON.stringify({ User_id: currentUserId.id, missionId, isDone: true })
       );
     }
   };
+
+  const currentDiamondsState = diamondsState.filter(
+    (users) => users.User_id === currentUserId.id
+  );
+
   return diamondsReceived ? (
     <div className="flex items-center justify-center pr-2">
       <MdDone className="text-green-500" />
