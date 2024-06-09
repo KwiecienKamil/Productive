@@ -33,16 +33,13 @@ const Diamonds: FC<DiamondsProps> = ({
       dispatch(addDiamonds({ User_id: currentUserId.id, value }));
       toast.success(`Successfully added ${value} diamonds`);
       setDiamondsReceived(true);
-      localStorage.setItem(
-        "missions",
-        JSON.stringify({ User_id: currentUserId.id, missionId, isDone: true })
-      );
     }
   };
 
   const currentDiamondsState = diamondsState.filter(
     (users) => users.User_id === currentUserId.id
   );
+  console.log(currentDiamondsState);
 
   return diamondsReceived ? (
     <div className="flex items-center justify-center pr-2">
