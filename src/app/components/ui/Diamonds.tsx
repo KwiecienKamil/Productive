@@ -6,14 +6,23 @@ import { toast } from "sonner";
 import { MdDone } from "react-icons/md";
 import axios from "axios";
 
+type FinishedMission = {
+  missionName: string;
+  missionValue: number;
+};
+
 type DiamondsProps = {
   value: number;
   numberToComplete: number;
   missionId: number;
+  finishedMissions: FinishedMission[];
 };
 
-const Diamonds: FC<DiamondsProps> = ({ value, numberToComplete }) => {
-  const [diamondsReceived, setDiamondsReceived] = useState(false);
+const Diamonds: FC<DiamondsProps> = ({
+  value,
+  numberToComplete,
+  finishedMissions,
+}) => {
   const state = useAppSelector((state) => state.doneDate.doneDates);
   const tasksState = useAppSelector((state) => state.task.tasks);
   const diamondsState = useAppSelector((state) => state.diamonds.diamonds);
@@ -23,6 +32,10 @@ const Diamonds: FC<DiamondsProps> = ({ value, numberToComplete }) => {
   const currentUserId = JSON.parse(currentUser!);
 
   const numberOfTasksDone = tasksState.length;
+
+  const finishedMissionsValues = finishedMissions.map(
+    (item) => item.missionValue
+  );
 
   const handleAddDiamonds = () => {
     if (numberOfTasksDone < numberToComplete && state.length > 0) {
@@ -48,11 +61,10 @@ const Diamonds: FC<DiamondsProps> = ({ value, numberToComplete }) => {
       }
       dispatch(addDiamonds({ User_id: currentUserId.id, value }));
       toast.success(`Successfully added ${value} diamonds`);
-      setDiamondsReceived(true);
+      window.location.reload();
     }
   };
-
-  return diamondsReceived ? (
+  return finishedMissionsValues.find((number) => number === value) ? (
     <div className="flex items-center justify-center pr-2">
       <MdDone className="text-green-500" />
     </div>

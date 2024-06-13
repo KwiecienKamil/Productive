@@ -17,7 +17,7 @@ const page = () => {
       .then((res) => {
         setFinishedMissions(res.data);
       });
-  }, [finishedMissions]);
+  }, []);
   return (
     <>
       <Navbar />

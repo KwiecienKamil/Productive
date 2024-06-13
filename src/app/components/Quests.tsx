@@ -2,7 +2,16 @@ import React from "react";
 import MissionCompoment from "./ui/MissionComponent";
 import { missions } from "../utils/Helpers";
 
-const Quests = () => {
+type FinishedMission = {
+  missionName: string;
+  missionValue: number;
+};
+
+type questsProps = {
+  finishedMissions: FinishedMission[];
+};
+
+const Quests = ({ finishedMissions }: questsProps) => {
   return (
     <div className="card w-[28rem] shadow-sm p-4 bg-sec text-white">
       <h1 className="font-bold">Quests</h1>
@@ -13,6 +22,7 @@ const Quests = () => {
             value={mission.value}
             id={mission.id}
             numberToComplete={mission.numberOfTasksToComplete}
+            finishedMissions={finishedMissions}
           />
         ))}
       </div>
