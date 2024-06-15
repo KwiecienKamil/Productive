@@ -25,7 +25,6 @@ const Diamonds: FC<DiamondsProps> = ({
 }) => {
   const state = useAppSelector((state) => state.doneDate.doneDates);
   const tasksState = useAppSelector((state) => state.task.tasks);
-  const diamondsState = useAppSelector((state) => state.diamonds.diamonds);
 
   const dispatch = useAppDispatch();
   const currentUser = localStorage.getItem("user");

@@ -47,13 +47,13 @@ export const missions = [
     numberOfTasksToComplete: 1,
   },
   {
-    id: 2,
+    id: 3,
     title: "Complete 3 Tasks",
     value: 10,
     numberOfTasksToComplete: 3,
   },
   {
-    id: 3,
+    id: 4,
     title: "Complete 5 Tasks",
     value: 15,
     numberOfTasksToComplete: 5,

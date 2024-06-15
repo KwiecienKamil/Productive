@@ -18,6 +18,7 @@ const Quests = ({ finishedMissions }: questsProps) => {
       <div className="pt-8 flex flex-col gap-4">
         {missions.map((mission) => (
           <MissionCompoment
+            key={mission.id}
             title={mission.title}
             value={mission.value}
             id={mission.id}
