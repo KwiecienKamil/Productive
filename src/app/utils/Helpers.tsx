@@ -59,3 +59,22 @@ export const missions = [
     numberOfTasksToComplete: 5,
   },
 ];
+
+export const streakPresents = [
+  {
+    day: "Day 1",
+    awardValue: 5,
+  },
+  {
+    day: "Day 3",
+    awardValue: 10,
+  },
+  {
+    day: "Day 5",
+    awardValue: 15,
+  },
+  {
+    day: "Day 10",
+    awardValue: 25,
+  },
+];

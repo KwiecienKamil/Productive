@@ -1,5 +1,6 @@
 import React from "react";
 import CurrentStreak from "./ui/CurrentStreak";
+import StreakPresents from "./StreakPresents";
 
 const DailyStreak = () => {
   return (
@@ -7,6 +8,7 @@ const DailyStreak = () => {
       <div className="flex items-center justify-between ">
         <CurrentStreak />
       </div>
+      <StreakPresents />
     </div>
   );
 };
