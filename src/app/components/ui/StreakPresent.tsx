@@ -10,7 +10,7 @@ type StreakPresentProps = {
 
 const StreakPresent = ({ day, awardValue }: StreakPresentProps) => {
   return (
-    <div className="flex items-center justify-center flex-col gap-2 pt-4">
+    <div className="flex items-center justify-center flex-col gap-2 pt-8">
       <Image src={packageImg} alt="package" className="w-[50px]" />
       <div className="flex items-center flex-col">
         <CiCircleCheck className="text-3xl" />
