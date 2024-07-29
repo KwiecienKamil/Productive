@@ -6,6 +6,9 @@ const ProfileComponent = () => {
   const [profileImage, setProfileImage] = useState("");
   const pictureRef = React.useRef<HTMLInputElement>(null);
 
+  const currentTasks = localStorage.getItem("tasks");
+  const currentTasksvalue = JSON.parse(currentTasks!);
+
   const handleImageClick = () => {
     pictureRef.current?.click();
   };
@@ -14,9 +17,9 @@ const ProfileComponent = () => {
   };
   return (
     <div className="w-full shadow-sm p-4 pt-10">
-      <div className="card w-[28rem] shadow-sm p-4 bg-white">
-        <div className="p-8 flex justify-between">
-          <div className="text-[14px] max-w-[200px]" onClick={handleImageClick}>
+      <div className="card w-[28rem] shadow-sm p-4 bg-sec text-white">
+        <div className="p-8 flex gap-8">
+          <div className="text-[20px] max-w-[200px]" onClick={handleImageClick}>
             {profileImage ? (
               <Image
                 src={URL.createObjectURL(profileImage)}
@@ -29,8 +32,8 @@ const ProfileComponent = () => {
               <Image
                 src={defaultUserPicture}
                 alt="User picture"
-                width={100}
-                height={100}
+                width={80}
+                height={80}
               />
             )}
             <input
@@ -40,9 +43,18 @@ const ProfileComponent = () => {
               onChange={handleChangeImage}
             />
           </div>
-          <p>
-            Hi, <span className="font-bold">Kamil👋</span>
-          </p>
+          <div className="mt-2">
+            <p>
+              Hi, <span className="font-bold">Kamil👋</span>
+            </p>
+            <div className="flex items-center gap-4 mt-2">
+              <p>Daily Tasks</p>
+              <button className="px-2 py-1 bg-pri text-sec rounded-lg">
+                {currentTasksvalue.length}
+              </button>
+            </div>
+            <p>Keep going!</p>
+          </div>
         </div>
       </div>
     </div>
