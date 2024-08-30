@@ -44,7 +44,7 @@ const Tasks = () => {
   };
 
   return (
-    <div className="max-h-screen w-[70%] px-4 overflow-scroll scrollbar scrollbar-thumb-transparent">
+    <div className="max-h-screen w-[80%] px-4 overflow-scroll scrollbar scrollbar-thumb-transparent">
       <div className="flex items-center gap-4">
         <p className="font-semibold text-lg">
           {tasksStateForCurrentUser?.length} Tasks

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import defaultUserPicture from "../assets/defaultUserPicture.png";
 
 const ProfileComponent = () => {
@@ -14,6 +14,7 @@ const ProfileComponent = () => {
   };
   const handleChangeImage = (event: React.SyntheticEvent<HTMLInputElement>) => {
     setProfileImage(event.target.files[0]);
+    console.log(event.target.files[0]);
   };
   return (
     <div className="w-full shadow-sm p-4 pt-10">

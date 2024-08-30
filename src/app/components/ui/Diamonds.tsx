@@ -1,6 +1,6 @@
 import { addDiamonds } from "@/app/services/state/features/diamondsSlice";
 import { useAppDispatch, useAppSelector } from "@/app/services/state/store";
-import React, { FC, useState } from "react";
+import React, { FC } from "react";
 import { IoDiamondSharp } from "react-icons/io5";
 import { toast } from "sonner";
 import { MdDone } from "react-icons/md";
