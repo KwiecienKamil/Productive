@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import defaultUserPicture from "../assets/defaultUserPicture.png";
 
 const ProfileComponent = () => {
-  const [profileImage, setProfileImage] = useState("");
+  const [profileImage, setProfileImage] = useState<File | null>(null);
   const pictureRef = React.useRef<HTMLInputElement>(null);
 
   const currentTasks = localStorage.getItem("tasks");
@@ -12,9 +12,11 @@ const ProfileComponent = () => {
   const handleImageClick = () => {
     pictureRef.current?.click();
   };
-  const handleChangeImage = (event: React.SyntheticEvent<HTMLInputElement>) => {
-    setProfileImage(event.target.files[0]);
-    console.log(event.target.files[0]);
+  const handleChangeImage = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files.length > 0) {
+      setProfileImage(event.target.files[0]);
+      console.log(event.target.files[0]);
+    }
   };
   return (
     <div className="w-full shadow-sm p-4 pt-10">
