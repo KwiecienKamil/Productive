@@ -1,23 +1,49 @@
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import defaultUserPicture from "../assets/defaultUserPicture.png";
 
 const ProfileComponent = () => {
-  const [profileImage, setProfileImage] = useState<File | null>(null);
+  const [profileImage, setProfileImage] = useState<string | null>(null);
   const pictureRef = React.useRef<HTMLInputElement>(null);
 
   const currentTasks = localStorage.getItem("tasks");
-  const currentTasksvalue = JSON.parse(currentTasks!);
+  const currentTasksvalue = currentTasks ? JSON.parse(currentTasks) : [];
+
+  useEffect(() => {
+    const savedProfileImage = localStorage.getItem("profileImage");
+    if (savedProfileImage) {
+      setProfileImage(savedProfileImage);
+    }
+  }, []);
+
+  // Function to convert a file to a base64 string
+  const convertToBase64 = (file: File) => {
+    return new Promise<string | ArrayBuffer | null>((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        resolve(reader.result);
+      };
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  };
 
   const handleImageClick = () => {
     pictureRef.current?.click();
   };
-  const handleChangeImage = (event: React.ChangeEvent<HTMLInputElement>) => {
+
+  const handleChangeImage = async (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     if (event.target.files && event.target.files.length > 0) {
-      setProfileImage(event.target.files[0]);
-      console.log(event.target.files[0]);
+      const file = event.target.files[0];
+      const base64Image = (await convertToBase64(file)) as string;
+      setProfileImage(base64Image);
+
+      localStorage.setItem("profileImage", base64Image);
     }
   };
+
   return (
     <div className="w-full shadow-sm p-4 pt-10">
       <div className="card w-[28rem] shadow-sm p-4 bg-sec text-white">
@@ -25,7 +51,7 @@ const ProfileComponent = () => {
           <div className="text-[20px] max-w-[200px]" onClick={handleImageClick}>
             {profileImage ? (
               <Image
-                src={URL.createObjectURL(profileImage)}
+                src={profileImage}
                 alt="User picture"
                 width={100}
                 height={100}
