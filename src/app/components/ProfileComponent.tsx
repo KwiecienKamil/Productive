@@ -4,17 +4,66 @@ import defaultUserPicture from "../assets/defaultUserPicture.png";
 
 const ProfileComponent = () => {
   const [profileImage, setProfileImage] = useState<string | null>(null);
+  const [streak, setStreak] = useState(0); // State for the streak
   const pictureRef = React.useRef<HTMLInputElement>(null);
 
   const currentTasks = localStorage.getItem("tasks");
   const currentTasksvalue = currentTasks ? JSON.parse(currentTasks) : [];
+
+  const currentDonedates = localStorage.getItem("doneDates");
+  const currentDonedatesvalue = currentDonedates
+    ? JSON.parse(currentDonedates)
+    : [];
 
   useEffect(() => {
     const savedProfileImage = localStorage.getItem("profileImage");
     if (savedProfileImage) {
       setProfileImage(savedProfileImage);
     }
+
+    // Calculate the streak when the component loads
+    calculateStreak(currentDonedatesvalue);
   }, []);
+
+  // Function to calculate the streak
+  const calculateStreak = (
+    doneDates: { Task_doneDate: string; Task_id: number }[]
+  ) => {
+    if (!doneDates.length) {
+      setStreak(0);
+      return;
+    }
+
+    // Parse dates into Date objects and sort them in ascending order
+    const dates = doneDates
+      .map(
+        (task) =>
+          new Date(`20${task.Task_doneDate.split("-").reverse().join("-")}`)
+      ) // Convert "dd-mm-yy" to "yyyy-mm-dd"
+      .sort((a, b) => a.getTime() - b.getTime());
+
+    let currentStreak = 1;
+    let maxStreak = 1;
+
+    for (let i = 1; i < dates.length; i++) {
+      const prevDate = dates[i - 1];
+      const currentDate = dates[i];
+
+      // Check if the difference between currentDate and prevDate is exactly 1 day
+      const differenceInTime = currentDate.getTime() - prevDate.getTime();
+      const differenceInDays = differenceInTime / (1000 * 3600 * 24);
+
+      if (differenceInDays === 1) {
+        currentStreak++;
+      } else {
+        currentStreak = 1; // Reset streak if the gap is more than a day
+      }
+
+      maxStreak = Math.max(maxStreak, currentStreak);
+    }
+
+    setStreak(maxStreak);
+  };
 
   // Function to convert a file to a base64 string
   const convertToBase64 = (file: File) => {
@@ -39,7 +88,6 @@ const ProfileComponent = () => {
       const file = event.target.files[0];
       const base64Image = (await convertToBase64(file)) as string;
       setProfileImage(base64Image);
-
       localStorage.setItem("profileImage", base64Image);
     }
   };
@@ -83,6 +131,14 @@ const ProfileComponent = () => {
               </button>
             </div>
             <p>Keep going!</p>
+
+            {/* Display Current Streak */}
+            <div className="flex items-center gap-4 mt-4">
+              <p>🔥 Current Streak</p>
+              <button className="px-4 py-2 bg-pri text-sec rounded-lg">
+                {streak} day{streak === 1 ? "" : "s"}
+              </button>
+            </div>
           </div>
         </div>
       </div>
