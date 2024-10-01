@@ -1,6 +1,8 @@
 import Image from "next/image";
 import React, { useState, useEffect } from "react";
 import defaultUserPicture from "../assets/defaultUserPicture.png";
+import { RiTaskLine } from "react-icons/ri";
+import { FaFire } from "react-icons/fa6";
 
 const ProfileComponent = () => {
   const [profileImage, setProfileImage] = useState<string | null>(null);
@@ -42,7 +44,7 @@ const ProfileComponent = () => {
       ) // Convert "dd-mm-yy" to "yyyy-mm-dd"
       .sort((a, b) => a.getTime() - b.getTime());
 
-    let currentStreak = 1;
+    let currentStreak = 0;
     let maxStreak = 1;
 
     for (let i = 1; i < dates.length; i++) {
@@ -124,21 +126,24 @@ const ProfileComponent = () => {
             <p>
               Hi, <span className="font-bold">Kamil👋</span>
             </p>
-            <div className="flex items-center gap-4 mt-2">
-              <p>Daily Tasks</p>
+            <div className="flex items-center justify-between gap-4 mt-2">
+              <div className="flex items-center gap-2">
+                <RiTaskLine /> Tasks
+              </div>
               <button className="px-2 py-1 bg-pri text-sec rounded-lg">
                 {currentTasksvalue.length}
               </button>
             </div>
-            <p>Keep going!</p>
-
-            {/* Display Current Streak */}
-            <div className="flex items-center gap-4 mt-4">
-              <p>🔥 Current Streak</p>
-              <button className="px-4 py-2 bg-pri text-sec rounded-lg">
-                {streak} day{streak === 1 ? "" : "s"}
+            <div className="flex items-center gap-2 mt-2">
+              <div className="flex items-center justify-between gap-2">
+                <FaFire />
+                Current Streak
+              </div>
+              <button className="px-2 py-1 bg-pri text-sec rounded-lg">
+                {streak}
               </button>
             </div>
+            <p>Keep going!</p>
           </div>
         </div>
       </div>
