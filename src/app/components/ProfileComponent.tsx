@@ -27,7 +27,7 @@ const ProfileComponent = () => {
     calculateStreak(currentDonedatesvalue);
   }, []);
 
-  // Function to calculate the streak
+  // Function to calculate the streak based on unique days
   const calculateStreak = (
     doneDates: { Task_doneDate: string; Task_id: number }[]
   ) => {
@@ -36,23 +36,27 @@ const ProfileComponent = () => {
       return;
     }
 
-    // Parse dates into Date objects and sort them in ascending order
-    const dates = doneDates
-      .map(
-        (task) =>
-          new Date(`20${task.Task_doneDate.split("-").reverse().join("-")}`)
-      ) // Convert "dd-mm-yy" to "yyyy-mm-dd"
-      .sort((a, b) => a.getTime() - b.getTime());
+    // Extract unique days from the dates and sort them in ascending order
+    const uniqueDays = Array.from(
+      new Set(
+        doneDates.map(
+          (task) =>
+            new Date(`20${task.Task_doneDate.split("-").reverse().join("-")}`)
+              .toISOString()
+              .split("T")[0] // Extract the date part only
+        )
+      )
+    ).sort();
 
-    let currentStreak = 0;
+    let currentStreak = 1;
     let maxStreak = 1;
 
-    for (let i = 1; i < dates.length; i++) {
-      const prevDate = dates[i - 1];
-      const currentDate = dates[i];
+    for (let i = 1; i < uniqueDays.length; i++) {
+      const prevDay = new Date(uniqueDays[i - 1]);
+      const currentDay = new Date(uniqueDays[i]);
 
-      // Check if the difference between currentDate and prevDate is exactly 1 day
-      const differenceInTime = currentDate.getTime() - prevDate.getTime();
+      // Check if the difference between consecutive dates is exactly 1 day
+      const differenceInTime = currentDay.getTime() - prevDay.getTime();
       const differenceInDays = differenceInTime / (1000 * 3600 * 24);
 
       if (differenceInDays === 1) {
@@ -95,10 +99,13 @@ const ProfileComponent = () => {
   };
 
   return (
-    <div className="w-full shadow-sm p-4 pt-10">
-      <div className="card w-[28rem] shadow-sm p-4 bg-sec text-white">
-        <div className="p-8 flex gap-8">
-          <div className="text-[20px] max-w-[200px]" onClick={handleImageClick}>
+    <div className="shadow-sm p-4 pt-10">
+      <div className="card shadow-sm p-4 bg-sec text-white">
+        <div className="p-8 flex gap-4">
+          <div
+            className="flex flex-col justify-center items-center text-[20px] max-w-[250px]"
+            onClick={handleImageClick}
+          >
             {profileImage ? (
               <Image
                 src={profileImage}
@@ -121,29 +128,32 @@ const ProfileComponent = () => {
               className="mt-4 hidden"
               onChange={handleChangeImage}
             />
-          </div>
-          <div className="mt-2">
-            <p>
+            <p className="text-center mt-2">
               Hi, <span className="font-bold">Kamil👋</span>
             </p>
-            <div className="flex items-center justify-between gap-4 mt-2">
-              <div className="flex items-center gap-2">
-                <RiTaskLine /> Tasks
+          </div>
+          <div>
+            <div className="flex items-center justify-between gap-4">
+              <div className="flex items-center justify-between gap-4">
+                <div className="flex items-center justify-center flex-col border-[2px] border-pri p-3 rounded-full">
+                  Tasks
+                  <span>{currentTasksvalue.length}</span>
+                </div>
               </div>
-              <button className="px-2 py-1 bg-pri text-sec rounded-lg">
-                {currentTasksvalue.length}
-              </button>
-            </div>
-            <div className="flex items-center gap-2 mt-2">
-              <div className="flex items-center justify-between gap-2">
-                <FaFire />
-                Current Streak
+              <div className="flex items-center justify-between gap-4">
+                <div className="flex items-center justify-center flex-col border-[2px] border-pri p-3 rounded-full">
+                  Streak
+                  <span>{streak}</span>
+                </div>
               </div>
-              <button className="px-2 py-1 bg-pri text-sec rounded-lg">
-                {streak}
-              </button>
+              <div className="flex items-center justify-between gap-4">
+                <div className="flex items-center justify-center flex-col border-[2px] border-pri p-3 rounded-full">
+                  Streak
+                  <span>{streak}</span>
+                </div>
+              </div>
             </div>
-            <p>Keep going!</p>
+            <p className="text-center mt-2">Keep going!</p>
           </div>
         </div>
       </div>
