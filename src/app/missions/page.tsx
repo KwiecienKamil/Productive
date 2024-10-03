@@ -4,6 +4,8 @@ import Quests from "../components/Quests";
 import DailyStreak from "../components/DailyStreak";
 import Navbar from "../components/Navbar";
 import axios from "axios";
+import { log } from "node:console";
+import { finished } from "node:stream";
 
 const page = () => {
   const [finishedMissions, setFinishedMissions] = useState([]);
@@ -18,6 +20,13 @@ const page = () => {
         setFinishedMissions(res.data);
       });
   }, []);
+
+  const totalMissionValue = finishedMissions.reduce(
+    (sum, mission: any) => sum + mission.missionValue,
+    0
+  );
+  localStorage.setItem("User Diamonds", totalMissionValue.toString());
+
   return (
     <>
       <Navbar />

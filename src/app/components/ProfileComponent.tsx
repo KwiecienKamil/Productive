@@ -1,16 +1,20 @@
 import Image from "next/image";
 import React, { useState, useEffect } from "react";
 import defaultUserPicture from "../assets/defaultUserPicture.png";
-import { RiTaskLine } from "react-icons/ri";
-import { FaFire } from "react-icons/fa6";
+import { IoDiamondSharp } from "react-icons/io5";
 
 const ProfileComponent = () => {
   const [profileImage, setProfileImage] = useState<string | null>(null);
   const [streak, setStreak] = useState(0); // State for the streak
   const pictureRef = React.useRef<HTMLInputElement>(null);
 
+  // Getting Tasks from local storage
   const currentTasks = localStorage.getItem("tasks");
   const currentTasksvalue = currentTasks ? JSON.parse(currentTasks) : [];
+
+  // Getting Diamonds value from local storage
+  const userDiamondsInString = localStorage.getItem("User Diamonds");
+  const userDiamonds = JSON.parse(userDiamondsInString!);
 
   const currentDonedates = localStorage.getItem("doneDates");
   const currentDonedatesvalue = currentDonedates
@@ -147,9 +151,9 @@ const ProfileComponent = () => {
                 </div>
               </div>
               <div className="flex items-center justify-between gap-4">
-                <div className="flex items-center justify-center flex-col border-[2px] border-pri p-3 rounded-full">
-                  Streak
-                  <span>{streak}</span>
+                <div className="flex items-center justify-center  border-[2px] border-pri p-3 rounded-full">
+                  <span>{userDiamonds}</span>
+                  <IoDiamondSharp className="text-blue-500 " />
                 </div>
               </div>
             </div>
