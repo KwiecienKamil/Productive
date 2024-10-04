@@ -120,7 +120,7 @@ const TaskCard: FC<TaskCardProps> = ({ Task_id, title, task }) => {
 
   return (
     <div
-      className="card w-96 bg-[#30343F] shadow-sm text-xl text-white pb-2"
+      className="card xs:max-w-[300px] xl:max-w-[500px] bg-[#30343F] shadow-sm text-xl text-white pb-2"
       key={Task_id}
     >
       <div className="p-4 py-2 flex items-center justify-between">
@@ -133,7 +133,7 @@ const TaskCard: FC<TaskCardProps> = ({ Task_id, title, task }) => {
             <div className="flex items-center gap-2">
               <input
                 type="text"
-                className="w-[180px] text-black pl-2"
+                className="w-[60%] text-black pl-2"
                 onChange={(e) => setNewTaskTitle(e.target.value)}
               />
               <FaCheckSquare

@@ -135,6 +135,10 @@ const ProfileComponent = () => {
             <p className="text-center mt-2">
               Hi, <span className="font-bold">Kamil👋</span>
             </p>
+            <div className="flex items-center justify-center">
+              <span>{userDiamonds}</span>
+              <IoDiamondSharp className="text-blue-500 " />
+            </div>
           </div>
           <div>
             <div className="flex items-center justify-between gap-4">
@@ -150,14 +154,9 @@ const ProfileComponent = () => {
                   <span>{streak}</span>
                 </div>
               </div>
-              <div className="flex items-center justify-between gap-4">
-                <div className="flex items-center justify-center  border-[2px] border-pri p-3 rounded-full">
-                  <span>{userDiamonds}</span>
-                  <IoDiamondSharp className="text-blue-500 " />
-                </div>
-              </div>
+              <div className="flex items-center justify-between gap-4"></div>
             </div>
-            <p className="text-center mt-2">Keep going!</p>
+            <p className="text-center mt-4">Keep going!</p>
           </div>
         </div>
       </div>
