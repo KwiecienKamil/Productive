@@ -120,7 +120,7 @@ const TaskCard: FC<TaskCardProps> = ({ Task_id, title, task }) => {
 
   return (
     <div
-      className="card xs:max-w-[300px] xl:max-w-[500px] bg-[#30343F] shadow-sm text-xl text-white pb-2"
+      className="card max-w-[250px] lg:max-w-[300px] xl:max-w-[500px] bg-[#30343F] shadow-sm text-xl text-white pb-2"
       key={Task_id}
     >
       <div className="p-4 py-2 flex items-center justify-between">
@@ -142,7 +142,9 @@ const TaskCard: FC<TaskCardProps> = ({ Task_id, title, task }) => {
               />
             </div>
           ) : (
-            <h2 className="card-title cursor-default">{title}</h2>
+            <h2 className="card-title cursor-default text-sm md:text-xl">
+              {title}
+            </h2>
           )}
         </div>
         <div className="flex items-center gap-2">

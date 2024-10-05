@@ -22,13 +22,15 @@ const Day = ({ day, rowIdx, doneDates }: DayProps) => {
       key={rowIdx}
     >
       {rowIdx === 0 && (
-        <p className="text-sm">{day.format("ddd").toUpperCase()}</p>
+        <p className="text-[8px] sm:text-sm">
+          {day.format("ddd").toUpperCase()}
+        </p>
       )}
       <div
         className={
           getCurrentDay() === "currentDay"
-            ? `h-4 w-4 m-2 bg-green-400 rounded-sm`
-            : `h-4 w-4 m-2 bg-slate-300 rounded-sm`
+            ? `h-3 w-2 sm:h-4 sm:w-4 m-2 bg-green-400 rounded-sm`
+            : `h-3 w-2 sm:h-4 sm:w-4 m-2 bg-slate-300 rounded-sm`
         }
       ></div>
     </div>
