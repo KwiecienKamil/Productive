@@ -44,16 +44,16 @@ const Tasks = () => {
   };
 
   return (
-    <div className="max-h-screen w-full xl:w-[80%] px-4 overflow-scroll scrollbar scrollbar-thumb-transparent">
+    <div className="max-h-screen xl:w-[80%] px-4 overflow-scroll scrollbar scrollbar-thumb-transparent">
       <div className="flex items-center gap-4">
-        <p className="font-semibold text-lg">
+        <p className="font-semibold text-[12px] md:text-lg">
           {tasksStateForCurrentUser?.length} Tasks
         </p>
         <NavButton followingHref="#">
           <FaPlus className="text-sm" onClick={handleAddTask} />
         </NavButton>
       </div>
-      <div className="pt-4 flex justify-between flex-wrap gap-4">
+      <div className="pt-4 flex justify-center sm:justify-between flex-wrap gap-2">
         {tasksStateForCurrentUser?.map((task: any) => (
           <TaskCard
             Task_id={task.Task_id}
