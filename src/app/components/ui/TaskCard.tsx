@@ -120,10 +120,10 @@ const TaskCard: FC<TaskCardProps> = ({ Task_id, title, task }) => {
 
   return (
     <div
-      className="card max-w-[250px] vsm:max-w-[300px] sm:max-w-[250px] lg:max-w-[300px] xl:max-w-[500px] bg-[#30343F] shadow-sm text-xl text-white pb-2"
+      className="card max-w-[220px] vsm:max-w-[290px] sm:max-w-[250px] lg:max-w-[300px] xl:max-w-[500px] bg-[#30343F] shadow-sm text-xl text-white pb-2"
       key={Task_id}
     >
-      <div className="p-4 py-2 flex items-center justify-between">
+      <div className="p-1 sm:p-4 py-2 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <CiEdit
             className="text-2xl cursor-pointer"
@@ -133,11 +133,11 @@ const TaskCard: FC<TaskCardProps> = ({ Task_id, title, task }) => {
             <div className="flex items-center gap-2">
               <input
                 type="text"
-                className="w-[60%] text-black pl-2"
+                className="w-[60%] text-black pl-2 text-xs sm:text-md"
                 onChange={(e) => setNewTaskTitle(e.target.value)}
               />
               <FaCheckSquare
-                className="text-2xl cursor-pointer text-green-400"
+                className="text-xl md:text-2xl cursor-pointer text-green-400"
                 onClick={handleNewTaskTitle}
               />
             </div>
@@ -154,11 +154,14 @@ const TaskCard: FC<TaskCardProps> = ({ Task_id, title, task }) => {
             onClick={handleTaskDone}
           />
           <SlOptionsVertical
-            className="cursor-pointer hover:text-gray-400 duration-300"
+            className="cursor-pointer hover:text-gray-400 duration-300 text-sm sm:text-md"
             onClick={() => setShowDeleteOption(!showDeleteOption)}
           />
           {showDeleteOption ? (
-            <button className="text-md text-red-500" onClick={handleRemoveTask}>
+            <button
+              className="text-[12px] sm:text-md text-red-500"
+              onClick={handleRemoveTask}
+            >
               Delete
             </button>
           ) : null}

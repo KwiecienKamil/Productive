@@ -21,7 +21,7 @@ export default function RootLayout({
       <html lang="en">
         <body
           data-theme="emerald"
-          className="h-screen px-[2px] vsm:px-[1rem] flex pt-8 font-inter text-black bg-gradient-to-r from-[#FBAB7E] to-[#F7CE68] overflow-hidden"
+          className="h-screen px-[2px] vsm:px-[2rem] flex pt-8 font-inter text-black bg-gradient-to-r from-[#FBAB7E] to-[#F7CE68] overflow-hidden"
         >
           <Toaster position="top-center" richColors />
           {children}
@@ -30,5 +30,3 @@ export default function RootLayout({
     </Providers>
   );
 }
-
-// px-[5%] xs:px-[20%] xl:px-[10%] xxl:px-[12%]
