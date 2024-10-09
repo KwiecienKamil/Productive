@@ -4,7 +4,7 @@ import StreakPresents from "./StreakPresents";
 
 const DailyStreak = () => {
   return (
-    <div className="card w-[28rem] shadow-sm p-4 bg-sec text-white">
+    <div className="card w-[95%] vsm:w-[27rem] md:w-[40%] shadow-sm p-4 bg-sec text-white">
       <div className="flex items-center justify-between">
         <CurrentStreak />
       </div>

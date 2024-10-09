@@ -29,7 +29,7 @@ const MissionCompoment: FC<MissionCompomentProps> = ({
 
   return (
     <div className="flex flex-col gap-1" key={id}>
-      <p>{title}</p>
+      <p className="text-sm sm:text-xl">{title}</p>
       <div className="flex items-center justify-between">
         <div
           className={

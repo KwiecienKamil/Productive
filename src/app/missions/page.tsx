@@ -30,9 +30,9 @@ const page = () => {
   return (
     <>
       <Navbar />
-      <div className="max-h-screen w-[90%] px-6 pt-2 text-xl">
+      <div className="max-h-screen w-full xsm:w-[90%] px-1 vsm:px-6 pt-2 text-xl">
         <h1 className="text-sec font-bold text-[14px]">Missions</h1>
-        <div className="pt-6 flex gap-8">
+        <div className="pt-6 flex flex-col sm:flex-row md:gap-6 gap-4 lg:gap-8">
           <Quests finishedMissions={finishedMissions} />
           <DailyStreak />
         </div>

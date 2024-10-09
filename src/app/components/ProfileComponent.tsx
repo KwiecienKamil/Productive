@@ -5,7 +5,7 @@ import { IoDiamondSharp } from "react-icons/io5";
 
 const ProfileComponent = () => {
   const [profileImage, setProfileImage] = useState<string | null>(null);
-  const [streak, setStreak] = useState(0); // State for the streak
+  const [streak, setStreak] = useState(0);
   const pictureRef = React.useRef<HTMLInputElement>(null);
 
   // Getting Tasks from local storage
@@ -104,7 +104,7 @@ const ProfileComponent = () => {
 
   return (
     <div className="shadow-sm p-4 pt-10">
-      <div className="card shadow-sm p-4 bg-sec text-white">
+      <div className="card w-[95%] sm:w-[28rem] shadow-sm p-4 bg-sec text-white">
         <div className="p-8 flex gap-4">
           <div
             className="flex flex-col justify-center items-center text-[20px] max-w-[250px]"
