@@ -103,11 +103,11 @@ const ProfileComponent = () => {
   };
 
   return (
-    <div className="shadow-sm p-4 pt-10">
-      <div className="card w-[95%] sm:w-[28rem] shadow-sm p-4 bg-sec text-white">
-        <div className="p-8 flex gap-4">
+    <div className="shadow-sm p-1 sm:p-4 pt-10">
+      <div className="card w-[95%] sm:w-[28rem] shadow-sm p-1 sm:p-4 bg-sec text-white">
+        <div className="p-4 sm:p-8 flex gap-1 sm:gap-4">
           <div
-            className="flex flex-col justify-center items-center text-[20px] max-w-[250px]"
+            className="flex flex-col  sm:justify-center items-center text-[20px] w-[100px] sm:max-w-[200px]"
             onClick={handleImageClick}
           >
             {profileImage ? (
@@ -132,31 +132,32 @@ const ProfileComponent = () => {
               className="mt-4 hidden"
               onChange={handleChangeImage}
             />
-            <p className="text-center mt-2">
+            <p className="text-center mt-2 text-sm md:text-xl">
               Hi, <span className="font-bold">Kamil👋</span>
             </p>
-            <div className="flex items-center justify-center">
+            <div className="flex items-center justify-center text-sm md:text-xl">
               <span>{userDiamonds}</span>
               <IoDiamondSharp className="text-blue-500 " />
             </div>
           </div>
           <div>
-            <div className="flex items-center justify-between gap-4">
-              <div className="flex items-center justify-between gap-4">
-                <div className="flex items-center justify-center flex-col border-[2px] border-pri p-3 rounded-full">
-                  Tasks
+            <div className="flex items-center justify-between flex-col sm:flex-row gap-4">
+              <div className="flex items-center justify-between gap-2 sm:gap-4">
+                <div className="flex items-center justify-center flex-col border-[2px] border-pri p-[6px] sm:p-3 rounded-full text-sm sm:text-xl">
+                  <span>Tasks</span>
                   <span>{currentTasksvalue.length}</span>
                 </div>
               </div>
-              <div className="flex items-center justify-between gap-4">
-                <div className="flex items-center justify-center flex-col border-[2px] border-pri p-3 rounded-full">
-                  Streak
+              <div className="flex items-center justify-between gap-2 sm:gap-4">
+                <div className="flex items-center justify-center flex-col border-[2px] border-pri p-[6px] sm:p-3 rounded-full text-sm sm:text-xl">
+                  <span>Streak</span>
                   <span>{streak}</span>
                 </div>
               </div>
-              <div className="flex items-center justify-between gap-4"></div>
             </div>
-            <p className="text-center mt-4">Keep going!</p>
+            <p className="text-center mt-4 text-[10px] sm:text-sm md:text-xl">
+              Keep going!
+            </p>
           </div>
         </div>
       </div>
