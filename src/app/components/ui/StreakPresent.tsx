@@ -8,7 +8,7 @@ type StreakPresentProps = {
   awardValue: number;
 };
 
-const StreakPresent = ({ day, awardValue }: StreakPresentProps) => {
+const StreakPresent = ({ day }: StreakPresentProps) => {
   return (
     <div className="flex items-center justify-center flex-col gap-2 pt-8">
       <Image src={packageImg} alt="package" className="w-[30px] sm:w-[50px]" />
