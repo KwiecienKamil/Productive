@@ -6,14 +6,21 @@ import { CiCircleCheck } from "react-icons/ci";
 type StreakPresentProps = {
   day: string;
   awardValue: number;
+  streak: any;
 };
 
-const StreakPresent = ({ day }: StreakPresentProps) => {
+const StreakPresent = ({ day, awardValue, streak }: StreakPresentProps) => {
+  console.log(streak);
+
   return (
     <div className="flex items-center justify-center flex-col gap-2 pt-8">
       <Image src={packageImg} alt="package" className="w-[30px] sm:w-[50px]" />
       <div className="flex items-center flex-col">
-        <CiCircleCheck className="text-xl sm:text-3xl" />
+        <CiCircleCheck
+          className={`text-xl sm:text-3xl ${
+            streak > awardValue ? "text-green-500" : "gray-400"
+          }`}
+        />
         <span className="text-sm sm:text-md">{day}</span>
       </div>
     </div>

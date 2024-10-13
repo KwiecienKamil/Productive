@@ -4,13 +4,12 @@ import Quests from "../components/Quests";
 import DailyStreak from "../components/DailyStreak";
 import Navbar from "../components/Navbar";
 import axios from "axios";
-import { log } from "node:console";
-import { finished } from "node:stream";
 
 const page = () => {
   const [finishedMissions, setFinishedMissions] = useState([]);
   const currentUser = localStorage.getItem("user");
   const currentUserId = JSON.parse(currentUser!);
+
   useEffect(() => {
     axios
       .post("http://localhost:3000/api/getMissions", {
