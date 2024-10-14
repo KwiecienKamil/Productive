@@ -64,17 +64,21 @@ export const streakPresents = [
   {
     day: "Day 1",
     awardValue: 5,
+    dayNumber: 1,
   },
   {
     day: "Day 3",
     awardValue: 10,
+    dayNumber: 3,
   },
   {
     day: "Day 5",
     awardValue: 15,
+    dayNumber: 5,
   },
   {
     day: "Day 10",
     awardValue: 25,
+    dayNumber: 10,
   },
 ];

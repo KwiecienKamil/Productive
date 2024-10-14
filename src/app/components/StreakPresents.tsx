@@ -10,6 +10,7 @@ const StreakPresents = ({ streak }: any) => {
           day={item.day}
           awardValue={item.awardValue}
           streak={streak}
+          dayNumber={item.dayNumber}
         />
       ))}
     </div>

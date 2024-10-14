@@ -7,19 +7,21 @@ import Rewards from "../components/Rewards";
 const Dashboard = () => {
   const [streak, setStreak] = useState(0);
 
-  // Getting Tasks from local storage
-  const currentTasks = localStorage.getItem("tasks");
-  const currentTasksvalue = currentTasks ? JSON.parse(currentTasks) : [];
-
   const currentDonedates = localStorage.getItem("doneDates");
   const currentDonedatesvalue = currentDonedates
     ? JSON.parse(currentDonedates)
     : [];
 
   useEffect(() => {
-    const savedProfileImage = localStorage.getItem("profileImage");
     calculateStreak(currentDonedatesvalue);
   }, []);
+
+  console.log(currentDonedatesvalue);
+
+  // Helper function to clear the time from a date object
+  const clearTime = (date: Date) => {
+    return new Date(date.getFullYear(), date.getMonth(), date.getDate());
+  };
 
   // Function to calculate the streak based on unique days
   const calculateStreak = (
@@ -62,7 +64,19 @@ const Dashboard = () => {
       maxStreak = Math.max(maxStreak, currentStreak);
     }
 
-    setStreak(maxStreak);
+    // Get the most recent date in the streak and check if it was yesterday
+    const lastDate = clearTime(new Date(uniqueDays[uniqueDays.length - 1]));
+    const today = clearTime(new Date());
+
+    const differenceInTime = today.getTime() - lastDate.getTime();
+    const differenceInDays = differenceInTime / (1000 * 3600 * 24);
+
+    // If the most recent date is not yesterday, reset the streak to 0
+    if (differenceInDays > 1) {
+      setStreak(0);
+    } else {
+      setStreak(maxStreak);
+    }
   };
 
   // Function to convert a file to a base64 string
