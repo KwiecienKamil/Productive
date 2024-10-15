@@ -21,7 +21,7 @@ const StreakPresent = ({
 
   const handleButtonClick = () => {
     setawardClaimed(true);
-    toast("XDD");
+    toast.success("Success!");
   };
 
   return (
@@ -37,7 +37,7 @@ const StreakPresent = ({
         {streak > dayNumber && !awardClaimed && (
           <button
             onClick={handleButtonClick}
-            className="bg-blue-500 text-white rounded px-4 py-2 mt-2 hover:bg-blue-600"
+            className="bg-pri rounded px-3 py-1 mt-2 hover:bg-pri text-sm text-black"
           >
             Claim Award
           </button>
