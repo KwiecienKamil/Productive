@@ -106,9 +106,6 @@ const ProfileComponent = () => {
                 </div>
               </div>
             </div>
-            <p className="text-center mt-4 text-[10px] sm:text-sm md:text-xl">
-              Keep going!
-            </p>
           </div>
         </div>
       </div>
