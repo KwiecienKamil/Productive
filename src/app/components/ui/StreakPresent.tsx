@@ -3,6 +3,8 @@ import packageImg from "@/app/assets/package.svg";
 import Image from "next/image";
 import { CiCircleCheck } from "react-icons/ci";
 import { toast } from "sonner";
+import { useAppDispatch } from "@/app/services/state/store";
+import { addDiamonds } from "@/app/services/state/features/diamondsSlice";
 
 type StreakPresentProps = {
   day: string;
@@ -19,8 +21,14 @@ const StreakPresent = ({
 }: StreakPresentProps) => {
   const [awardClaimed, setawardClaimed] = useState(false);
 
+  const currentUser = localStorage.getItem("user");
+  const currentUserId = JSON.parse(currentUser!);
+
+  const dispatch = useAppDispatch();
+
   const handleButtonClick = () => {
     setawardClaimed(true);
+    dispatch(addDiamonds({ User_id: currentUserId.id, awardValue }));
     toast.success("Success!");
   };
 
