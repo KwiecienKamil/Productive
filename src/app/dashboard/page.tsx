@@ -6,6 +6,7 @@ import Rewards from "../components/Rewards";
 
 const Dashboard = () => {
   const [streak, setStreak] = useState(0);
+  const [firstDoneDate, setFirstDoneDate] = useState<string | null>(null); // New state to store the first done date
 
   const currentDonedates = localStorage.getItem("doneDates");
   const currentDonedatesvalue = currentDonedates
@@ -15,8 +16,6 @@ const Dashboard = () => {
   useEffect(() => {
     calculateStreak(currentDonedatesvalue);
   }, []);
-
-  console.log(currentDonedatesvalue);
 
   // Helper function to clear the time from a date object
   const clearTime = (date: Date) => {
@@ -39,7 +38,7 @@ const Dashboard = () => {
           (task) =>
             new Date(`20${task.Task_doneDate.split("-").reverse().join("-")}`)
               .toISOString()
-              .split("T")[0] // Extract the date part only
+              .split("T")[0]
         )
       )
     ).sort();
@@ -77,21 +76,16 @@ const Dashboard = () => {
     } else {
       setStreak(maxStreak);
     }
-  };
 
-  // Function to convert a file to a base64 string
-  const convertToBase64 = (file: File) => {
-    return new Promise<string | ArrayBuffer | null>((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        resolve(reader.result);
-      };
-      reader.onerror = reject;
-      reader.readAsDataURL(file);
-    });
+    // Set the first done date (earliest date)
+    if (uniqueDays.length) {
+      setFirstDoneDate(uniqueDays[0]);
+    }
   };
 
   localStorage.setItem("streak", JSON.stringify(streak));
+  localStorage.setItem("firstDoneDate", firstDoneDate || ""); // Save the first done date to localStorage
+
   return (
     <>
       <Navbar />
