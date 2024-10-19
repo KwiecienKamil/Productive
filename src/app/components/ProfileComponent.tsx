@@ -15,6 +15,9 @@ const ProfileComponent = () => {
   const currentTasks = localStorage.getItem("tasks");
   const currentTasksvalue = currentTasks ? JSON.parse(currentTasks) : [];
 
+  // Getting Tasks from local storage
+  const firstDoneDate = localStorage.getItem("firstDoneDate");
+
   // Getting Diamonds value from local storage
   const userDiamondsInString = localStorage.getItem("User Diamonds");
   const userDiamonds = JSON.parse(userDiamondsInString!);
@@ -106,6 +109,7 @@ const ProfileComponent = () => {
                 </div>
               </div>
             </div>
+            <p>{firstDoneDate}</p>
           </div>
         </div>
       </div>
