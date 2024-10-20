@@ -56,6 +56,28 @@ const ProfileComponent = () => {
     }
   };
 
+  // Helper function to calculate the difference between two dates
+  const getTimeSinceFirstDoneDate = (firstDoneDate: string) => {
+    const now = new Date();
+    const firstDate = new Date(firstDoneDate);
+
+    const diffInMilliseconds = now.getTime() - firstDate.getTime();
+    const diffInDays = Math.floor(diffInMilliseconds / (1000 * 60 * 60 * 24));
+    const diffInMonths = Math.floor(diffInDays / 30);
+    const diffInYears = Math.floor(diffInMonths / 12);
+
+    const remainingMonths = diffInMonths % 12;
+    const remainingDays = diffInDays % 30;
+
+    // If less than a year, return only months and days
+    if (diffInYears === 0) {
+      return `${remainingMonths} months, ${remainingDays} days`;
+    }
+
+    // If 1 or more years, return years, months, and days
+    return `${diffInYears} years, ${remainingMonths} months, ${remainingDays} days`;
+  };
+
   return (
     <div className="shadow-sm p-1 sm:p-4 pt-10">
       <div className="card w-[95%] sm:w-[28rem] shadow-sm p-1 sm:p-4 bg-sec text-white">
@@ -109,7 +131,14 @@ const ProfileComponent = () => {
                 </div>
               </div>
             </div>
-            <p>{firstDoneDate}</p>
+            <div className="text-sm pt-4">
+              <p>You are working on yourself for</p>
+              <p className="font-semibold text-pri text-lg">
+                {firstDoneDate
+                  ? getTimeSinceFirstDoneDate(firstDoneDate)
+                  : "N/A"}
+              </p>
+            </div>
           </div>
         </div>
       </div>
