@@ -131,9 +131,9 @@ const ProfileComponent = () => {
                 </div>
               </div>
             </div>
-            <div className="text-sm pt-4">
-              <p>You are working on yourself for</p>
-              <p className="font-semibold text-pri text-lg">
+            <div className="text-[10px] md:text-sm pt-4 w-full">
+              <p>You are with us for</p>
+              <p className="font-semibold text-pri text-[12px] md:text-lg">
                 {firstDoneDate
                   ? getTimeSinceFirstDoneDate(firstDoneDate)
                   : "N/A"}
