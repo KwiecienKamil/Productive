@@ -87,11 +87,13 @@ const Dashboard = () => {
   localStorage.setItem("firstDoneDate", firstDoneDate || ""); // Save the first done date to localStorage
 
   return (
-    <>
-      <Navbar />
-      <Tasks />
+    <div className="flex justify-between w-full">
+      <div className="flex">
+        <Navbar />
+        <Tasks />
+      </div>
       <Rewards />
-    </>
+    </div>
   );
 };
 
