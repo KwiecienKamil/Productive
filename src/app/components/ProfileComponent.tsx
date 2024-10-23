@@ -7,6 +7,11 @@ const ProfileComponent = () => {
   const [profileImage, setProfileImage] = useState<string | null>(null);
   const pictureRef = React.useRef<HTMLInputElement>(null);
 
+  const currentUserName = localStorage.getItem("user");
+  const currentUserNameValue = currentUserName
+    ? JSON.parse(currentUserName)
+    : [];
+
   // Getting current streak
   const currentstreakValue = localStorage.getItem("streak");
   const streak = currentstreakValue ? JSON.parse(currentstreakValue) : [];
@@ -83,7 +88,7 @@ const ProfileComponent = () => {
       <div className="card w-[95%] sm:w-[28rem] shadow-sm p-1 sm:p-4 bg-sec text-white">
         <div className="p-4 sm:p-8 flex gap-1 sm:gap-4">
           <div
-            className="flex flex-col  sm:justify-center items-center text-[20px] w-[100px] sm:max-w-[200px]"
+            className="flex flex-col  sm:justify-center items-center text-[20px] w-[100px] md:w-[150px] sm:max-w-[200px]"
             onClick={handleImageClick}
           >
             {profileImage ? (
@@ -108,8 +113,11 @@ const ProfileComponent = () => {
               className="mt-4 hidden"
               onChange={handleChangeImage}
             />
-            <p className="text-center mt-2 text-sm md:text-xl">
-              Hi, <span className="font-bold">Kamil👋</span>
+            <p className="flex items-center gap-2 text-center mt-2 text-sm md:text-xl">
+              Hi,
+              <span className="font-bold flex items-center">
+                {currentUserNameValue.Username}👋
+              </span>
             </p>
             <div className="flex items-center justify-center text-sm md:text-xl">
               <span>{userDiamonds}</span>

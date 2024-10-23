@@ -1,10 +1,25 @@
 import { SlPresent } from "react-icons/sl";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const Rewards = () => {
+  const router = useRouter();
+
+  const logoutHandler = () => {
+    router.push("/");
+    localStorage.clear();
+  };
   return (
     <div>
-      <div className="hidden sm:flex w-[110px] sm:w-[150px] flex-col sm:items-normal items-center gap-2 pt-12 relative ">
+      <div className="hidden sm:flex w-[110px] sm:w-[150px] flex-col sm:items-normal items-center gap-2 pt-2 relative ">
+        <div className="flex justify-end w-full">
+          <button
+            onClick={logoutHandler}
+            className="hidden sm:block text-sm sm:text-lg text-center p-1 mb-8 sm:px-4 sm:py-1 bg-red-500 rounded-lg text-black hover:brightness-75 duration-300"
+          >
+            Logout
+          </button>
+        </div>
         <SlPresent className="mt-[2px] text-yellow-600 text-2xl" />
         <div>
           <h3 className="font-semibold text-center text-[11px] xl:text-md xxl:text-lg">
@@ -15,7 +30,7 @@ const Rewards = () => {
           </p>
         </div>
       </div>
-      <div className="flex justify-center">
+      <div className="flex flex-col justify-center">
         <Link
           href="/missions"
           className="hidden sm:block w-full text-sm sm:text-lg text-center mt-2 p-1 sm:px-4 sm:py-1 bg-green-500 rounded-lg text-black hover:brightness-95 duration-300"
