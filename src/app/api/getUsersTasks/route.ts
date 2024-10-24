@@ -4,9 +4,9 @@ import { NextResponse } from "next/server";
 export async function POST(req: Request) {
   if (req.method === "POST") {
     try {
-      const { taskName, parsedUserId } = await req.json();
-      const values = [taskName, parsedUserId];
-      const query = "INSERT INTO Tasks (Task_title, User_id) VALUES (?, ?)";
+      const { User_id } = await req.json();
+      const values = [User_id];
+      const query = "SELECT * FROM Tasks WHERE User_id = ?";
       const db = await pool.getConnection();
       const [result]: any = await db.execute(query, values);
 

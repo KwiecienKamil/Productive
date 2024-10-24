@@ -2,7 +2,7 @@
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React, { FC, FormEvent, useState } from "react";
+import React, { FC, FormEvent, useEffect, useState } from "react";
 import { toast } from "sonner";
 
 const LoginForm: FC = () => {
@@ -10,17 +10,15 @@ const LoginForm: FC = () => {
   const [password, setPassword] = useState("");
   const router = useRouter();
 
-  const handleGetTasks = () => {
-    axios.get("http://localhost:3000/api/tasks").then((res) => {
-      localStorage.setItem("tasks", JSON.stringify(res.data));
-    });
-  };
-
   const handleGetDoneDates = () => {
     axios.get("http://localhost:3000/api/getDoneDates").then((res) => {
       localStorage.setItem("doneDates", JSON.stringify(res.data));
     });
   };
+
+  const currentUser = localStorage.getItem("user");
+  const currentUserValue = currentUser ? JSON.parse(currentUser) : [];
+  const currentUserId = currentUserValue.id;
 
   const handleLogin = async (e: FormEvent) => {
     e.preventDefault();
@@ -42,7 +40,6 @@ const LoginForm: FC = () => {
                 Username: username,
               })
             );
-            handleGetTasks();
             handleGetDoneDates();
           } else {
             toast.error("Wrong Username/Password");

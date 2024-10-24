@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import Tasks from "../components/Tasks";
 import Rewards from "../components/Rewards";
+import axios from "axios";
 
 const Dashboard = () => {
   const [streak, setStreak] = useState(0);
@@ -12,6 +13,21 @@ const Dashboard = () => {
   const currentDonedatesvalue = currentDonedates
     ? JSON.parse(currentDonedates)
     : [];
+
+  const currentUser = localStorage.getItem("user");
+  const currentUserValue = currentUser ? JSON.parse(currentUser) : [];
+  const currentUserId = currentUserValue.id;
+
+  useEffect(() => {
+    axios
+      .post("http://localhost:3000/api/getUsersTasks", {
+        User_id: currentUserId,
+      })
+      .then((res) => {
+        localStorage.setItem("tasks", JSON.stringify(res.data));
+        window.history.replaceState({}, document.title); // Update state without reload
+      });
+  }, [currentUserId]);
 
   useEffect(() => {
     calculateStreak(currentDonedatesvalue);

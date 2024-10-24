@@ -6,8 +6,8 @@ const Rewards = () => {
   const router = useRouter();
 
   const logoutHandler = () => {
-    router.push("/");
     localStorage.clear();
+    router.push("/");
   };
   return (
     <div>
