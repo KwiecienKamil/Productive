@@ -100,7 +100,7 @@ const Dashboard = () => {
   };
 
   localStorage.setItem("streak", JSON.stringify(streak));
-  localStorage.setItem("firstDoneDate", firstDoneDate || ""); // Save the first done date to localStorage
+  localStorage.setItem("firstDoneDate", firstDoneDate || "");
 
   return (
     <div className="flex justify-between w-full">

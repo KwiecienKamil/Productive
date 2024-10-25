@@ -16,14 +16,11 @@ const ProfileComponent = () => {
   const currentstreakValue = localStorage.getItem("streak");
   const streak = currentstreakValue ? JSON.parse(currentstreakValue) : [];
 
-  // Getting Tasks from local storage
   const currentTasks = localStorage.getItem("tasks");
   const currentTasksvalue = currentTasks ? JSON.parse(currentTasks) : [];
 
-  // Getting Tasks from local storage
   const firstDoneDate = localStorage.getItem("firstDoneDate");
 
-  // Getting Diamonds value from local storage
   const userDiamondsInString = localStorage.getItem("User Diamonds");
   const userDiamonds = JSON.parse(userDiamondsInString!);
 
