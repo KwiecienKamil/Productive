@@ -28,7 +28,7 @@ const Tasks = () => {
       })
       .then((res) => {
         if (res.status === 200) {
-          axios.get("http://localhost:3000/api/tasks", {}).then((res) => {
+          axios.get("http://localhost:3000/api/tasks").then((res) => {
             const addedTaskId = res.data[res.data.length - 1].Task_id;
             dispatch(
               addTask({

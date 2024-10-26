@@ -9,14 +9,20 @@ const Dashboard = () => {
   const [streak, setStreak] = useState(0);
   const [firstDoneDate, setFirstDoneDate] = useState<string | null>(null); // New state to store the first done date
 
-  const currentDonedates = localStorage.getItem("doneDates");
-  const currentDonedatesvalue = currentDonedates
-    ? JSON.parse(currentDonedates)
+  const currentUser = localStorage.getItem("user");
+  const currentUserValue = currentUser ? JSON.parse(currentUser) : {};
+  const currentUserId = currentUserValue.id;
+
+  const currentDoneDates = localStorage.getItem("doneDates");
+  const currentDoneDatesValue = currentDoneDates
+    ? JSON.parse(currentDoneDates)
     : [];
 
-  const currentUser = localStorage.getItem("user");
-  const currentUserValue = currentUser ? JSON.parse(currentUser) : [];
-  const currentUserId = currentUserValue.id;
+  // Filter done dates to include only those with the matching user ID
+  const filteredDoneDates = currentDoneDatesValue.filter(
+    (date: any) => date.User_id === currentUserId
+  );
+  console.log(filteredDoneDates, currentUserId);
 
   useEffect(() => {
     axios
@@ -30,7 +36,7 @@ const Dashboard = () => {
   }, [currentUserId]);
 
   useEffect(() => {
-    calculateStreak(currentDonedatesvalue);
+    calculateStreak(filteredDoneDates);
   }, []);
 
   // Helper function to clear the time from a date object

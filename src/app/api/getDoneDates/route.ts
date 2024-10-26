@@ -7,7 +7,7 @@ export async function GET(request: Request) {
       const db = await pool.getConnection();
 
       const query =
-        "SELECT Tasks.Task_id, doneDates.Task_doneDate FROM Tasks JOIN doneDates ON Tasks.Task_id = doneDates.Task_id";
+        "SELECT Tasks.Task_id, Tasks.User_id, doneDates.Task_doneDate FROM Tasks JOIN doneDates ON Tasks.Task_id = doneDates.Task_id";
       const [result] = await db.execute(query);
       db.release();
 
