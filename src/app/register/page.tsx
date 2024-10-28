@@ -21,6 +21,7 @@ const Register = () => {
         .then((res) => {
           if (res.status === 200) {
             toast.success("Successfully Registered, Now Login");
+            localStorage.setItem("Loading", "true");
             router.push("/");
           } else {
             toast.error("There was a problem, try again later");

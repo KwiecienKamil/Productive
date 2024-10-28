@@ -24,3 +24,24 @@ export async function POST(req: Request) {
     return NextResponse.json("FAILED");
   }
 }
+
+// export async function GET(request: Request) {
+//   if (request.method === "GET") {
+//     try {
+//       const db = await pool.getConnection();
+
+//       const query = "SELECT * FROM Tasks";
+//       const [result] = await db.execute(query);
+//       db.release();
+
+//       return NextResponse.json(result);
+//     } catch (error) {
+//       return NextResponse.json(
+//         {
+//           error: error,
+//         },
+//         { status: 500 }
+//       );
+//     }
+//   }
+// }

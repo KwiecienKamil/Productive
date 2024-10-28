@@ -9,6 +9,14 @@ const Dashboard = () => {
   const [streak, setStreak] = useState(0);
   const [firstDoneDate, setFirstDoneDate] = useState<string | null>(null); // New state to store the first done date
 
+  const getisLoading = localStorage.getItem("Loading");
+  const isLoading = getisLoading ? JSON.parse(getisLoading) : [];
+
+  if (isLoading == true) {
+    window.location.reload();
+    localStorage.setItem("Loading", "false");
+  }
+
   const currentUser = localStorage.getItem("user");
   const currentUserValue = currentUser ? JSON.parse(currentUser) : {};
   const currentUserId = currentUserValue.id;
@@ -22,7 +30,6 @@ const Dashboard = () => {
   const filteredDoneDates = currentDoneDatesValue.filter(
     (date: any) => date.User_id === currentUserId
   );
-  console.log(filteredDoneDates, currentUserId);
 
   useEffect(() => {
     axios
@@ -44,7 +51,7 @@ const Dashboard = () => {
     return new Date(date.getFullYear(), date.getMonth(), date.getDate());
   };
 
-  // Function to calculate the streak based on unique days
+  // Function to calculate the streak from today backwards, stopping at any break
   const calculateStreak = (
     doneDates: { Task_doneDate: string; Task_id: number }[]
   ) => {
@@ -53,7 +60,7 @@ const Dashboard = () => {
       return;
     }
 
-    // Extract unique days from the dates and sort them in ascending order
+    // Extract unique days from the dates, sort in descending order
     const uniqueDays = Array.from(
       new Set(
         doneDates.map(
@@ -63,45 +70,29 @@ const Dashboard = () => {
               .split("T")[0]
         )
       )
-    ).sort();
+    ).sort((a, b) => new Date(b).getTime() - new Date(a).getTime());
 
-    let currentStreak = 1;
-    let maxStreak = 1;
-
-    for (let i = 1; i < uniqueDays.length; i++) {
-      const prevDay = new Date(uniqueDays[i - 1]);
-      const currentDay = new Date(uniqueDays[i]);
-
-      // Check if the difference between consecutive dates is exactly 1 day
-      const differenceInTime = currentDay.getTime() - prevDay.getTime();
-      const differenceInDays = differenceInTime / (1000 * 3600 * 24);
-
-      if (differenceInDays === 1) {
-        currentStreak++;
-      } else {
-        currentStreak = 1; // Reset streak if the gap is more than a day
-      }
-
-      maxStreak = Math.max(maxStreak, currentStreak);
-    }
-
-    // Get the most recent date in the streak and check if it was yesterday
-    const lastDate = clearTime(new Date(uniqueDays[uniqueDays.length - 1]));
+    let currentStreak = 0;
     const today = clearTime(new Date());
 
-    const differenceInTime = today.getTime() - lastDate.getTime();
-    const differenceInDays = differenceInTime / (1000 * 3600 * 24);
+    for (let i = 0; i < uniqueDays.length; i++) {
+      const currentDay = clearTime(new Date(uniqueDays[i]));
+      const expectedDate = new Date(today);
+      expectedDate.setDate(today.getDate() - currentStreak);
 
-    // If the most recent date is not yesterday, reset the streak to 0
-    if (differenceInDays > 1) {
-      setStreak(0);
-    } else {
-      setStreak(maxStreak);
+      // Check if the current day matches the expected date in the streak
+      if (currentDay.getTime() === expectedDate.getTime()) {
+        currentStreak++; // Continue streak if the date is consecutive
+      } else {
+        break; // Stop streak if there is a day break
+      }
     }
 
-    // Set the first done date (earliest date)
+    setStreak(currentStreak); // Set the final streak count in state
+
+    // Set the first done date (earliest date in uniqueDays)
     if (uniqueDays.length) {
-      setFirstDoneDate(uniqueDays[0]);
+      setFirstDoneDate(uniqueDays[uniqueDays.length - 1]);
     }
   };
 

@@ -32,6 +32,7 @@ const LoginForm: FC = () => {
         .then((res) => {
           if (res.data.success === true) {
             toast.success("Successfully Logged In");
+            localStorage.setItem("Loading", "true");
             router.push("/dashboard");
             localStorage.setItem(
               "user",
