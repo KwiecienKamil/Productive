@@ -32,7 +32,6 @@ const LoginForm: FC = () => {
         .then((res) => {
           if (res.data.success === true) {
             toast.success("Successfully Logged In");
-            localStorage.setItem("Loading", "true");
             router.push("/dashboard");
             localStorage.setItem(
               "user",
@@ -41,6 +40,7 @@ const LoginForm: FC = () => {
                 Username: username,
               })
             );
+            localStorage.setItem("Loading", "true");
             handleGetDoneDates();
           } else {
             toast.error("Wrong Username/Password");

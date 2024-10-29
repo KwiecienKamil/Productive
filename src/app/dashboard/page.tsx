@@ -9,17 +9,12 @@ const Dashboard = () => {
   const [streak, setStreak] = useState(0);
   const [firstDoneDate, setFirstDoneDate] = useState<string | null>(null); // New state to store the first done date
 
-  const getisLoading = localStorage.getItem("Loading");
-  const isLoading = getisLoading ? JSON.parse(getisLoading) : [];
-
-  if (isLoading == true) {
-    window.location.reload();
-    localStorage.setItem("Loading", "false");
-  }
-
   const currentUser = localStorage.getItem("user");
   const currentUserValue = currentUser ? JSON.parse(currentUser) : {};
   const currentUserId = currentUserValue.id;
+
+  const isLoading = localStorage.getItem("Loading");
+  const isLoadinValue = isLoading ? JSON.parse(isLoading) : {};
 
   const currentDoneDates = localStorage.getItem("doneDates");
   const currentDoneDatesValue = currentDoneDates
