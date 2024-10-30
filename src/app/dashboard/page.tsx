@@ -13,9 +13,6 @@ const Dashboard = () => {
   const currentUserValue = currentUser ? JSON.parse(currentUser) : {};
   const currentUserId = currentUserValue.id;
 
-  const isLoading = localStorage.getItem("Loading");
-  const isLoadinValue = isLoading ? JSON.parse(isLoading) : {};
-
   const currentDoneDates = localStorage.getItem("doneDates");
   const currentDoneDatesValue = currentDoneDates
     ? JSON.parse(currentDoneDates)
