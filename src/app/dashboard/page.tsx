@@ -24,13 +24,17 @@ const Dashboard = () => {
   );
 
   useEffect(() => {
+    const isDataLoading = localStorage.getItem("Loading");
     axios
       .post("http://localhost:3000/api/getUsersTasks", {
         User_id: currentUserId,
       })
       .then((res) => {
         localStorage.setItem("tasks", JSON.stringify(res.data));
-        window.history.replaceState({}, document.title); // Update state without reload
+        if (isDataLoading === "true") {
+          localStorage.setItem("Loading", "false");
+          window.location.reload();
+        }
       });
   }, [currentUserId]);
 
