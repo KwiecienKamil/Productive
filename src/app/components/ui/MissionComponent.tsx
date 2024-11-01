@@ -27,15 +27,23 @@ const MissionCompoment: FC<MissionCompomentProps> = ({
   const state = useAppSelector((state) => state.doneDate.doneDates);
   const numberOfTasksDone = tasksState.length;
 
+  console.log(numberOfTasksDone, numberToComplete);
+
+  // const finishedMissionsValues = finishedMissions.map(
+  //   (item) => item.missionValue
+  // );
+
+  // console.log(finishedMissionsValues);
+
   return (
     <div className="flex flex-col gap-1" key={id}>
       <p className="text-sm sm:text-xl">{title}</p>
       <div className="flex items-center justify-between">
         <div
           className={
-            numberOfTasksDone < numberToComplete && state.length > 0
-              ? "w-[80%] p-2 mt-1 bg-[#DCDCDC] rounded-full overflow-hidden"
-              : "w-[80%] p-2 mt-1 bg-green-400 rounded-full overflow-hidden"
+            numberOfTasksDone >= numberToComplete && state.length > 0
+              ? "w-[80%] p-2 mt-1 bg-green-400 rounded-full overflow-hidden"
+              : "w-[80%] p-2 mt-1 bg-[#DCDCDC] rounded-full overflow-hidden"
           }
         ></div>
         <Diamonds
