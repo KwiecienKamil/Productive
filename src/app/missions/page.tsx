@@ -26,6 +26,9 @@ const page = () => {
   );
   localStorage.setItem("User Diamonds", totalMissionValue.toString());
 
+
+  
+
   return (
     <>
       <Navbar />
